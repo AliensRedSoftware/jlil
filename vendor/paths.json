@@ -1,0 +1,20 @@
+{
+  "classPaths": {
+    "": [
+      "/jphp-core/jars/jphp-core-0.9.3-SNAPSHOT.jar",
+      "/jphp-core/jars/asm-all-5.2.jar",
+      "/jphp-runtime/jars/jphp-runtime-1.0.3.jar",
+      "/jphp-zend-ext/jars/gson-2.7.jar",
+      "/jphp-zend-ext/jars/jphp-zend-ext-0.9.3-SNAPSHOT.jar",
+      "/jphp-json-ext/jars/gson-2.7.jar",
+      "/jphp-json-ext/jars/jphp-json-ext-0.9.3-SNAPSHOT.jar",
+      "/jphp-gui-ext/jars/x-jphp-gui-ext-2.1.3.jar",
+      "/jphp-xml-ext/jars/jphp-xml-ext-0.9.3-SNAPSHOT.jar",
+      "/jphp-graphic-ext/jars/jphp-graphic-ext-0.9.3-SNAPSHOT.jar",
+      "/jphp-json-ext/jars/gson-2.7.jar",
+      "/jphp-json-ext/jars/jphp-json-ext-0.9.3-SNAPSHOT.jar"
+    ]
+  },
+  "includes": [],
+  "plugins": []
+}
