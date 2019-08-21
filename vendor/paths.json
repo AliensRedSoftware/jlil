@@ -12,9 +12,12 @@
       "/jphp-xml-ext/jars/jphp-xml-ext-0.9.3-SNAPSHOT.jar",
       "/jphp-graphic-ext/jars/jphp-graphic-ext-0.9.3-SNAPSHOT.jar",
       "/jphp-json-ext/jars/gson-2.7.jar",
-      "/jphp-json-ext/jars/jphp-json-ext-0.9.3-SNAPSHOT.jar"
+      "/jphp-json-ext/jars/jphp-json-ext-0.9.3-SNAPSHOT.jar",
+      "/dn-app-framework/src"
     ]
   },
-  "includes": [],
+  "includes": [
+    "php/gui/framework/functions.php"
+  ],
   "plugins": []
 }

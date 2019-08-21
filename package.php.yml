@@ -6,9 +6,10 @@ deps:
   jphp-zend-ext: '*'
   jphp-gui-ext: '*'
   jphp-json-ext: '*'
+  dn-app-framework: '*'
 plugins:
 - App
 sources:
 - src
 includes:
-- index.php
+- bootstrap.php
