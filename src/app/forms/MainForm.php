@@ -9,6 +9,7 @@ class MainForm extends AbstractForm {
      * @event show
      */
 	function doShow(UXWindowEvent $e = null) {
+		$this->vbox->style	=	'-fx-border-color:#333333;';
 		//-->API...
 		api::setApi('capi');
 		api::setPermission('system');
@@ -96,6 +97,30 @@ class MainForm extends AbstractForm {
 	}
 
 	/**
+     * @event theme.action
+     */
+    function doThemeAction(UXEvent $e = null) {
+		$this->clearStylesheets();
+        switch($e->sender->selectedIndex) {
+			case 1:
+				$this->addStylesheet('app/.theme/bootstrap3.fx.css');
+			break;
+			case 2:
+				$this->addStylesheet('app/.theme/bootstrap2.fx.css');
+			break;
+			case 3:
+				$this->addStylesheet('app/.theme/dark.fx.css');
+			break;
+			case 4:
+				$this->addStylesheet('app/.theme/FlatBee.fx.css');
+			break;
+			case 5:
+				$this->addStylesheet('app/.theme/MistSilver.fx.css');
+			break;
+        }
+    }
+
+	/**
 	 * Возвращаем созданное сообщение
 	 * ------------------------------
 	 */
@@ -105,6 +130,7 @@ class MainForm extends AbstractForm {
 			if (!is_array($val)) {
 				$panel	=	new UXPanel();
 				$label	=	new UXLabel($val);
+				$label->padding = [5, 5, 5, 5];
 				$panel->add($label);
 				$this->vbox->add($panel);
 			}

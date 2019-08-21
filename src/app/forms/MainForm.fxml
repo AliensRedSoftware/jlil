@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?import javafx.scene.*?><?import javafx.collections.*?><?import javafx.scene.layout.*?><?import javafx.scene.control.*?><?import javafx.scene.text.*?><?import javafx.scene.image.*?><?import javafx.scene.shape.*?><?import javafx.scene.paint.*?><?import javafx.scene.web.*?><?import javafx.geometry.*?><?import java.lang.*?><?import org.develnext.jphp.ext.javafx.classes.data.*?><?import org.develnext.jphp.ext.javafx.support.*?><?import org.develnext.jphp.ext.javafx.support.control.*?><?import org.develnext.jphp.ext.game.support.*?><AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" focusTraversable="false" id="" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480" prefWidth="320" styleClass="">
   <children>
-    <ComboBox AnchorPane.leftAnchor="8" AnchorPane.rightAnchor="8" editable="false" focusTraversable="true" id="dot" layoutX="8" layoutY="8" prefHeight="25" prefWidth="304" promptText="" styleClass="combo-box-base combo-box " value="" visibleRowCount="10">
+    <ComboBox AnchorPane.leftAnchor="8" AnchorPane.rightAnchor="8" editable="false" focusTraversable="true" id="dot" layoutX="8" layoutY="40" prefHeight="25" prefWidth="304" promptText="" styleClass="combo-box-base combo-box " value="" visibleRowCount="10">
       <items xmlns:fx="http://javafx.com/fxml">
         <FXCollections fx:factory="observableArrayList"/>
       </items>
     </ComboBox>
     <Data cursor="DEFAULT" enabled="1" id="data-dot" visible="1"/>
-    <ComboBox AnchorPane.leftAnchor="8" AnchorPane.rightAnchor="8" editable="false" focusTraversable="true" id="space" layoutX="8" layoutY="40" prefHeight="25" prefWidth="304" promptText="" styleClass="combo-box-base combo-box " value="" visibleRowCount="10">
+    <ComboBox AnchorPane.leftAnchor="8" AnchorPane.rightAnchor="8" editable="false" focusTraversable="true" id="space" layoutX="8" layoutY="72" prefHeight="25" prefWidth="304" promptText="" styleClass="combo-box-base combo-box " value="" visibleRowCount="10">
       <items xmlns:fx="http://javafx.com/fxml">
         <FXCollections fx:factory="observableArrayList"/>
       </items>
     </ComboBox>
     <Data cursor="DEFAULT" enabled="1" id="data-space" visible="1"/>
-    <ComboBox AnchorPane.leftAnchor="8" AnchorPane.rightAnchor="8" editable="false" focusTraversable="true" id="threads" layoutX="8" layoutY="72" prefHeight="25" prefWidth="304" promptText="" styleClass="combo-box-base combo-box " value="" visibleRowCount="10">
+    <ComboBox AnchorPane.leftAnchor="8" AnchorPane.rightAnchor="8" editable="false" focusTraversable="true" id="threads" layoutX="8" layoutY="104" prefHeight="25" prefWidth="304" promptText="" styleClass="combo-box-base combo-box " value="" visibleRowCount="10">
       <items xmlns:fx="http://javafx.com/fxml">
         <FXCollections fx:factory="observableArrayList"/>
       </items>
     </ComboBox>
     <Data cursor="DEFAULT" enabled="1" id="data-threads" visible="1"/>
-    <ScrollPane AnchorPane.bottomAnchor="48" AnchorPane.leftAnchor="8" AnchorPane.rightAnchor="8" AnchorPane.topAnchor="104" focusTraversable="false" hbarPolicy="AS_NEEDED" hvalue="0" id="container" layoutX="8" layoutY="104" prefHeight="328" prefWidth="304" styleClass="scroll-pane " vbarPolicy="AS_NEEDED" vvalue="0">
+    <ScrollPane AnchorPane.bottomAnchor="48" AnchorPane.leftAnchor="8" AnchorPane.rightAnchor="8" AnchorPane.topAnchor="136" focusTraversable="false" hbarPolicy="AS_NEEDED" hvalue="0" id="container" layoutX="8" layoutY="136" prefHeight="296" prefWidth="304" styleClass="scroll-pane " vbarPolicy="AS_NEEDED" vvalue="0">
       <content>
-        <AnchorPane focusTraversable="false" id="" maxHeight="-1" maxWidth="-1" minHeight="-1" minWidth="-1" prefHeight="328" prefWidth="304" styleClass="">
+        <AnchorPane focusTraversable="false" id="" maxHeight="-1" maxWidth="-1" minHeight="-1" minWidth="-1" prefHeight="296" prefWidth="304" styleClass="">
           <children>
-            <VBox alignment="TOP_LEFT" focusTraversable="false" id="vbox" layoutX="0" layoutY="0" maxHeight="-1" maxWidth="-1" minHeight="-1" minWidth="-1" prefHeight="328" prefWidth="304" spacing="5" styleClass="">
+            <VBox alignment="TOP_RIGHT" focusTraversable="false" id="vbox" layoutX="0" layoutY="0" maxHeight="-1" maxWidth="-1" minHeight="-1" minWidth="-1" prefHeight="296" prefWidth="304" spacing="5" styleClass="">
               <padding>
                 <Insets bottom="5" left="5" right="5" top="5"/>
               </padding>
@@ -41,5 +41,18 @@
       </font>
     </TextField>
     <Data cursor="DEFAULT" enabled="1" id="data-send" visible="1"/>
+    <ComboBox AnchorPane.leftAnchor="8" AnchorPane.rightAnchor="8" editable="false" focusTraversable="true" id="theme" layoutX="8" layoutY="8" prefHeight="25" prefWidth="304" promptText="" styleClass="combo-box-base combo-box " value="" visibleRowCount="10">
+      <items xmlns:fx="http://javafx.com/fxml">
+        <FXCollections fx:factory="observableArrayList">
+          <String fx:value="Стандартная"/>
+          <String fx:value="bootstrap3"/>
+          <String fx:value="bootstrap2"/>
+          <String fx:value="Темная"/>
+          <String fx:value="FlatBee"/>
+          <String fx:value="Mist silver"/>
+        </FXCollections>
+      </items>
+    </ComboBox>
+    <Data cursor="DEFAULT" enabled="1" id="data-theme" visible="1"/>
   </children>
 </AnchorPane>
