@@ -91,6 +91,9 @@ class MainForm extends AbstractForm {
 				case 200:
 					$this->doThreadsAction();
 				break;
+				default:
+					$this->doThreadsAction();
+				break;
 			}
 		});
 		$e->sender->clear();

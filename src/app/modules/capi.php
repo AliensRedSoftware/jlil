@@ -1,6 +1,8 @@
 <?php
 namespace app\modules;
 use std, gui, framework, app;
+use php\format\JsonProcessor;
+use Exception;
 
 class capi {
 
@@ -49,31 +51,55 @@ class capi {
 	 */
 	static function request ($req = 'getDot', $opt = [], $callback = null) {
 		$form = app()->getForm(MainForm);
+		$form->dot->enabled		=	false;
+		$form->space->enabled	=	false;
+		$form->threads->enabled	=	false;
+		$form->send->enabled	=	false;
 		$form->showPreloader('Возвращение...');
 		$api		=	capi::getApi();
 		$permission	=	capi::getPermission();
 		(new Thread(function() use ($form, $api, $permission, $req, $opt, $callback) { //Создание потока основного и его запуск
-			uiLater(function() use ($form, $api, $permission, $req, $opt, $callback) {
-				if ($opt) {
-					unset($options);
-					foreach ($opt as $func => $val) {
-						$i++;
-						$options .= "$func=$val";
-						if (count($opt) != $i) {
-							$options .= '&';
-						}
+			if ($opt) {
+				unset($options);
+				foreach ($opt as $func => $val) {
+					$i++;
+					$val = str::replace($val, ' ', '+');
+					$options .= "$func=$val";
+					if (count($opt) != $i) {
+						$options .= '&';
 					}
-					$r = stream::getContents("http://s2s5.space/$api/$permission/$req?$options");
-				} else {
-					$r = stream::getContents("http://s2s5.space/$api/$permission/$req");
 				}
-				capi::setRequest($r);
-				$form->hidePreloader();
-				if(is_callable($callback)) {
-					$callback($r);
+				$r = fs::get("http://s2s5.space/$api/$permission/$req?$options");
+			} else {
+				$r = fs::get("http://s2s5.space/$api/$permission/$req");
+			}
+			capi::setRequest($r);
+		 	uiLater(function() use ($form, $callback, $r, $req, $opt) {
+				try {
+					$parser = new JsonProcessor(JsonProcessor::DESERIALIZE_AS_ARRAYS);
+					$r = $parser->parse($r);
+					if(is_callable($callback)) {
+						$form->hidePreloader();
+						$form->dot->enabled		=	true;
+						$form->space->enabled	=	true;
+						$form->threads->enabled	=	true;
+						$form->send->enabled	=	true;
+						$callback($r);
+					}
+				} catch (Exception $e) {
+					$form->showPreloader('Обновление...');
+					waitAsync (5000, function () use ($callback, $r, $req, $opt){
+						capi::request($req, $opt, function ($data) use ($callback, $r){
+							if($data){
+								if (is_callable($callback)) {
+									$callback($data);
+								}
+							}
+						});
+					});
 				}
-			});
-		}))->start();
+		 	});
+		 }))->start();
 	}
 
 	/**
@@ -103,9 +129,8 @@ class capi {
  	 */
 	static function getDot ($callback = null) {
 		capi::request('getDot', [], function ($data) use ($callback) {
-			echo "[getDot][Возвращение] => $data";
 			if (is_callable($callback)) {
-				$callback(json_decode($data, true));
+				$callback($data);
 			}
 		});
 	}
@@ -116,10 +141,9 @@ class capi {
  	 * @return string
  	 */
 	static function getSpace ($dot = null, $callback = null) {
-		capi::request('getSpace', ['dot' => $dot], function ($data) use ($callback) {
-			echo "[getSpace][Возвращение] => $data";
+		capi::request('getSpace', ['dot' => $dot], function ($data) use ($dot, $callback) {
 			if (is_callable($callback)) {
-				$callback(json_decode($data, true));
+				$callback($data);
 			}
 		});
 	}
@@ -131,9 +155,8 @@ class capi {
  	 */
 	static function getMsg ($space = null, $callback = null) {
 		capi::request('getMsg', ['space' => $space], function ($data) use ($callback) {
-			echo "[getMsg][Возвращение] => $data";
 			if (is_callable($callback)) {
-				$callback(json_decode($data, true));
+				$callback($data);
 			}
 		});
 	}
@@ -143,9 +166,8 @@ class capi {
 	 */
 	static function sendThreads ($threads = null, $txt, $callback = null) {
 		capi::request('SendMsg', ['threads' => $threads, 'txt' => $txt], function ($data) use ($callback) {
-			echo "[SendMsg][Возвращение] => $data";
 			if (is_callable($callback)) {
-				$callback(json_decode($data, true));
+				$callback($data);
 			}
 		});
 	}
