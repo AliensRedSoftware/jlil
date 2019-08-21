@@ -35,6 +35,9 @@ class MainForm extends AbstractForm {
 					foreach ($data['response'] as $val => $key) {
 						$this->threads->items->add($val);
 					}
+					if (!$this->threads->selected) {
+						$this->threads->selectedIndex = 0;
+					}
 				break;
 			}
 		});
@@ -50,6 +53,9 @@ class MainForm extends AbstractForm {
 					$this->space->items->clear();
 					foreach ($data['response'] as $val) {
 						$this->space->items->add($val);
+					}
+					if (!$this->space->selected) {
+						$this->space->selectedIndex = 0;
 					}
 				break;
 			}
@@ -94,16 +100,16 @@ class MainForm extends AbstractForm {
 	 * ------------------------------
 	 */
 	public function getMsg (array $msg) {
-		$vbox	=	new UXVbox();
+		$this->vbox->children->clear();
 		foreach ($msg as $val) {
 			if (!is_array($val)) {
 				$panel	=	new UXPanel();
 				$label	=	new UXLabel($val);
 				$panel->add($label);
-				$vbox->add($panel);
+				$this->vbox->add($panel);
 			}
 		}
-		return $vbox;
+		return $this->vbox;
 	}
 
 	/**

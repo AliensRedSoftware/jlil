@@ -21,8 +21,16 @@
     <Data cursor="DEFAULT" enabled="1" id="data-threads" visible="1"/>
     <ScrollPane AnchorPane.bottomAnchor="48" AnchorPane.leftAnchor="8" AnchorPane.rightAnchor="8" AnchorPane.topAnchor="104" focusTraversable="false" hbarPolicy="AS_NEEDED" hvalue="0" id="container" layoutX="8" layoutY="104" prefHeight="328" prefWidth="304" styleClass="scroll-pane " vbarPolicy="AS_NEEDED" vvalue="0">
       <content>
-        <AnchorPane focusTraversable="false" id="" maxHeight="-1" maxWidth="-1" minHeight="-1" minWidth="-1" prefHeight="0" prefWidth="0" styleClass="">
-          <children/>
+        <AnchorPane focusTraversable="false" id="" maxHeight="-1" maxWidth="-1" minHeight="-1" minWidth="-1" prefHeight="328" prefWidth="304" styleClass="">
+          <children>
+            <VBox alignment="TOP_LEFT" focusTraversable="false" id="vbox" layoutX="0" layoutY="0" maxHeight="-1" maxWidth="-1" minHeight="-1" minWidth="-1" prefHeight="328" prefWidth="304" spacing="5" styleClass="">
+              <padding>
+                <Insets bottom="5" left="5" right="5" top="5"/>
+              </padding>
+              <children/>
+            </VBox>
+            <Data cursor="DEFAULT" enabled="1" id="data-vbox" visible="1"/>
+          </children>
         </AnchorPane>
       </content>
     </ScrollPane>
