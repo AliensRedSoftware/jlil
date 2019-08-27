@@ -29,7 +29,7 @@ class MainForm extends AbstractForm {
      * @event space.action
      */
     function doSpaceAction(UXEvent $e = null) {
-		api::getMsg($e->sender->selected, function ($data) {
+		api::getMsg($e->sender->selected, $this->dot->selected, function ($data) {
 			switch ($data['status']) {
 				case 200:
 					$this->threads->items->clear();
@@ -67,7 +67,7 @@ class MainForm extends AbstractForm {
      * @event threads.action
      */
     function doThreadsAction(UXEvent $e = null) {
-		api::getMsg($this->space->selected, function ($data) {
+		api::getMsg($this->space->selected, $this->dot->selected, function ($data) {
 			switch ($data['status']) {
 				case 200:
 					$msgArr = [];

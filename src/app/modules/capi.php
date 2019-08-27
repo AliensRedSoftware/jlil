@@ -153,8 +153,8 @@ class capi {
  	 * --------------------
  	 * @return string
  	 */
-	static function getMsg ($space = null, $callback = null) {
-		capi::request('getMsg', ['space' => $space], function ($data) use ($callback) {
+	static function getMsg ($space = null, $dot = null, $callback = null) {
+		capi::request('getMsg', ['space' => $space, 'dot' => $dot], function ($data) use ($callback) {
 			if (is_callable($callback)) {
 				$callback($data);
 			}
