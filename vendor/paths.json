@@ -13,7 +13,13 @@
       "/jphp-graphic-ext/jars/jphp-graphic-ext-0.9.3-SNAPSHOT.jar",
       "/jphp-json-ext/jars/gson-2.7.jar",
       "/jphp-json-ext/jars/jphp-json-ext-0.9.3-SNAPSHOT.jar",
-      "/dn-app-framework/src"
+      "/dn-app-framework/src",
+      "/jphp-gui-jfoenix-ext/jars/x-jfoenix-8.0.8.jar",
+      "/jphp-gui-jfoenix-ext/jars/x-jphp-gui-jfoenix-ext-2.0.0.jar",
+      "/dn-zip-bundle/src/vendor/develnext.bundle.zip.ZipBundle",
+      "/jphp-zip-ext/jars/zt-zip-1.11.jar",
+      "/jphp-zip-ext/jars/jphp-zip-ext-0.9.3-SNAPSHOT.jar",
+      "/jphp-zip-ext/jars/slf4j-api-1.6.6.jar"
     ]
   },
   "includes": [

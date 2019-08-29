@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?import javafx.scene.*?><?import javafx.collections.*?><?import javafx.scene.layout.*?><?import javafx.scene.control.*?><?import javafx.scene.text.*?><?import javafx.scene.image.*?><?import javafx.scene.shape.*?><?import javafx.scene.paint.*?><?import javafx.scene.web.*?><?import javafx.geometry.*?><?import java.lang.*?><?import org.develnext.jphp.ext.javafx.classes.data.*?><?import org.develnext.jphp.ext.javafx.support.*?><?import org.develnext.jphp.ext.javafx.support.control.*?><?import org.develnext.jphp.ext.game.support.*?><AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" focusTraversable="false" id="" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="336" prefWidth="320" styleClass="">
+  <children>
+    <VBox AnchorPane.bottomAnchor="7" AnchorPane.leftAnchor="8" AnchorPane.rightAnchor="8" AnchorPane.topAnchor="8" alignment="TOP_LEFT" focusTraversable="false" id="vbox" layoutX="8" layoutY="8" maxHeight="-1" maxWidth="-1" minHeight="-1" minWidth="-1" prefHeight="321" prefWidth="304" spacing="5" styleClass="">
+      <children>
+        <HBox AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" alignment="CENTER_LEFT" focusTraversable="false" id="hbox3" layoutX="0" layoutY="0" maxHeight="-1" maxWidth="-1" minHeight="-1" minWidth="-1" prefHeight="25" prefWidth="304" spacing="5" styleClass="">
+          <children>
+            <com.jfoenix.controls.JFXTextField alignment="CENTER_LEFT" editable="true" focusColor="#4059a9" focusTraversable="true" id="skin" layoutX="0" layoutY="0" prefColumnCount="12" prefHeight="32" prefWidth="9.999999999999E12" promptText="Ссылка на главный скин:" text="" unFocusColor="#4d4d4d">
+              <font>
+                <Font name="System Regular" size="13"/>
+              </font>
+              <styleClass xmlns:fx="http://javafx.com/fxml">
+                <String fx:value="text-input"/>
+                <String fx:value="text-field"/>
+                <String fx:value="jfx-text-field"/>
+              </styleClass>
+            </com.jfoenix.controls.JFXTextField>
+            <Data cursor="DEFAULT" enabled="1" id="data-skin" visible="1"/>
+          </children>
+        </HBox>
+        <Data cursor="DEFAULT" enabled="1" id="data-hbox3" visible="1"/>
+        <HBox AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="32" alignment="CENTER_LEFT" focusTraversable="false" id="hbox" layoutX="0" layoutY="30" maxHeight="-1" maxWidth="-1" minHeight="-1" minWidth="-1" prefHeight="25" prefWidth="304" spacing="5" styleClass="">
+          <children>
+            <com.jfoenix.controls.JFXTextField alignment="CENTER_LEFT" editable="true" focusColor="#4059a9" focusTraversable="true" id="zavisim" layoutX="0" layoutY="0" prefColumnCount="12" prefHeight="32" prefWidth="9.999999999999E12" promptText="Ссылка на зависимость скина:" text="" unFocusColor="#4d4d4d">
+              <font>
+                <Font name="System Regular" size="13"/>
+              </font>
+              <styleClass xmlns:fx="http://javafx.com/fxml">
+                <String fx:value="text-input"/>
+                <String fx:value="text-field"/>
+                <String fx:value="jfx-text-field"/>
+              </styleClass>
+            </com.jfoenix.controls.JFXTextField>
+            <com.jfoenix.controls.JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="LEFT" ellipsisString="..." focusTraversable="true" graphicTextGap="4" id="add" layoutX="278" layoutY="0" prefHeight="32" prefWidth="144" style="-fx-background-color: white;" styleClass="button jfx-button " text="+" textAlignment="LEFT" underline="false" wrapText="false">
+              <font>
+                <Font name="System Regular" size="13"/>
+              </font>
+            </com.jfoenix.controls.JFXButton>
+            <Data cursor="DEFAULT" enabled="1" id="data-add" tooltipText="Новая зависимость" visible="1"/>
+            <Data cursor="DEFAULT" enabled="1" id="data-zavisim" visible="1"/>
+          </children>
+        </HBox>
+        <Data cursor="DEFAULT" enabled="1" id="data-hbox" visible="1"/>
+        <ListViewEx AnchorPane.bottomAnchor="-136" AnchorPane.leftAnchor="8" AnchorPane.rightAnchor="-160" AnchorPane.topAnchor="88" editable="false" fixedCellSize="-1" focusTraversable="true" id="list" layoutX="0" layoutY="60" prefHeight="99999999" prefWidth="99999999" styleClass="list-view ">
+          <items xmlns:fx="http://javafx.com/fxml">
+            <FXCollections fx:factory="observableArrayList"/>
+          </items>
+        </ListViewEx>
+        <Data cursor="DEFAULT" enabled="1" id="data-list" visible="1"/>
+        <com.jfoenix.controls.JFXButton AnchorPane.bottomAnchor="-19" AnchorPane.leftAnchor="-15" AnchorPane.rightAnchor="145" alignment="CENTER" buttonType="RAISED" contentDisplay="LEFT" ellipsisString="..." focusTraversable="true" graphicTextGap="4" id="clear" layoutX="0" layoutY="296" prefHeight="32" prefWidth="1.0000000000000E+81" style="-fx-background-color: white;" styleClass="button jfx-button " text="Очистить список" textAlignment="LEFT" underline="false" wrapText="false">
+          <font>
+            <Font name="System Regular" size="13"/>
+          </font>
+        </com.jfoenix.controls.JFXButton>
+        <Data cursor="DEFAULT" enabled="1" id="data-clear" tooltipText="Очистить список" visible="1"/>
+      </children>
+    </VBox>
+    <Data cursor="DEFAULT" enabled="1" id="data-vbox" visible="1"/>
+  </children>
+</AnchorPane>

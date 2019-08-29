@@ -47,3 +47,33 @@ dependencies:
       sha256: 7b96a70d8203d8ebf6fdc281efafbe990335b83cfde5226c1c0782513741afd0
       size: 782380
       repo: http://api.develnext.org
+  jphp-gui-jfoenix-ext:
+    version: 2.0.0
+    info:
+      sha256: f6787a940b05f374c265560df5e4a9a2dcd4268af71155e06959442ed02ba2b2
+      size: 2462364
+      repo: http://api.develnext.org
+  jphp-gui-jfx-linux:
+    version: 11.0.1
+    info:
+      sha256: d4f249719984c8a79f7abd1f6eaeef5eaee7284acb4a6d8e344130e7b522820b
+      size: 37946197
+      repo: http://api.develnext.org
+  jphp-controlsfx-ext:
+    version: 1.0.5
+    info:
+      sha256: c7100f3325f6da1c447fe4a8d36b5148a1e35f8c31e659aed8ce2f919d140cdd
+      size: 1287808
+      repo: http://api.develnext.org
+  dn-zip-bundle:
+    version: 1.1.0
+    info:
+      sha256: 59a8b0ce9932ca2c57d658e398bb68e01535e808d4db39338262211b59adddd9
+      size: 23557
+      repo: http://api.develnext.org
+  jphp-zip-ext:
+    version: 1.0.0
+    info:
+      sha256: ce797dddf5b9a948f53dbd258f6b508dc2b43bd379ccf838f246d686d90d6784
+      size: 154805
+      repo: http://api.develnext.org

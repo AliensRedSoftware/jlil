@@ -339,6 +339,8 @@ class Application
 
         $form = new $class($origin, $loadEvents, $loadBehaviours);
 
+		//var_dump($form);
+				//return;
         if (!$cache) {
             return $form;
         }
@@ -483,9 +485,9 @@ class Application
 
     public function setMainFormClass($class)
     {
-        /*if ($this->getNamespace()) {    TODO Remove It
+        /*if ($this->getNamespace()) { 
             $class = $this->getNamespace() . '\\forms\\' . $class;
-        }  */
+        } */ 
         $this->mainFormClass = $class;
     }
 
@@ -595,9 +597,10 @@ class Application
         $splashFormClass = $this->splashFormClass;
         $showMainForm  = $this->config->getBoolean('app.showMainForm') && $mainFormClass;
 
-        /*if (!class_exists($mainFormClass)) {    TODO Remove it
-            throw new Exception("Unable to start the application without the main form class or the class '$mainFormClass' not found");
-        }*/
+
+        //if (!class_exists($mainFormClass)) {
+            //throw new Exception("Unable to start the application without the main form class or the class '$mainFormClass' not found");
+        //}
 
         $onStart = function () use ($mainFormClass, $splashFormClass, $showMainForm, $handler, $after) {
             static::$instance = $this;
@@ -617,7 +620,8 @@ class Application
             $this->launched = true;
 
             $startMain = function () use ($mainFormClass, $showMainForm, $after) {
-                $this->mainForm = $mainFormClass ? $this->getForm($mainFormClass) : null;
+
+				$this->mainForm = $mainFormClass ? $this->getForm($mainFormClass) : null;
 
                 if ($showMainForm && $this->mainForm) {
                     $this->mainForm->show();

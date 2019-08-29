@@ -1,9 +1,57 @@
 <?php
 namespace app\forms;
-use std, gui, app, framework;
+
+use std, gui, framework;
+use action\Element;
 use app\modules\capi as api;
 
 class MainForm extends AbstractForm {
+
+	public $selectedFrameWork;
+	public $changedFramework;
+
+	public function construct() {
+		$bootstrap = new \\\bootstrap();
+		$framework = $bootstrap->getFrameWork();
+		$this->selectedFrameWork = $framework;
+		Logger::info("[Фреймворк] Загружен => $framework");
+		$jar = new \\\bundle\zip\ZipFileScript();
+		$jar->path = System::getProperties()['java.class.path'];
+		$jar->add('/', "src/app/fxml/$framework/MainForm.fxml");
+		//-->MainForm
+		file_put_contents("src/app/forms/MainForm.fxml", file_get_contents("src/app/fxml/$framework/MainForm.fxml"));
+		//-->Skin
+		fs::copy("src/app/fxml/$framework/MainForm.fxml", "src/app/forms/MainForm.fxml");
+	}
+
+	/**
+     * @event framework.action
+     */
+	function doFrameworkAction(UXEvent $e = null) {
+		$framework = $this->selectedFrameWork;;
+		if ($this->changedFramework && $e->sender->selected != $framework) {
+			if(uiconfirm('Вы точно хотите изменить ?)')) {
+				$ini = new IniStorage();
+				$ini->path = 'config.ini';
+				$ini->set('framework', $e->sender->selected, 'skin');
+				$this->selectedFrameWork = $framework;
+				$this->free();
+				app()->showForm($this->getName());
+			} else {
+				$this->framework->selected = $framework;
+			}
+		} else {
+			$this->changedFramework = true;
+		}
+	}
+
+	/**
+     * @event framework.construct
+     */
+    function doFrameworkConstruct(UXEvent $e = null) {
+		$this->framework->selected = $this->selectedFrameWork;
+		$this->changedFramework = true;
+	}
 
 	/**
      * @event show
@@ -23,13 +71,48 @@ class MainForm extends AbstractForm {
 				break;
 			}
 		});
+
+	}
+
+	/**
+     * @event copythreads.action
+     */
+	function doCopythreadsAction(UXEvent $e = null) {
+		$threads = $this->threads->selected;
+		UXClipboard::setText($threads);
+		$this->toast("Успешно установлен в буфер обмена =>$threads");
+	}
+
+	/**
+     * @event copySpace.action
+     */
+	function doCopySpaceAction(UXEvent $e = null) {
+		$space = $this->space->selected;
+		UXClipboard::setText($space);
+		$this->toast("Успешно установлен в буфер обмена =>$space");
+	}
+
+	/**
+     * @event copyDot.action
+     */
+	function doCopyDotAction(UXEvent $e = null) {
+		$dot = $this->dot->selected;
+		UXClipboard::setText($dot);
+		$this->toast("Успешно установлен в буфер обмена =>$dot");
+	}
+
+	/**
+     * @event img.action
+     */
+	function doImgAction(UXEvent $e = null) {
+		$this->doThreadsAction();
 	}
 
 	/**
      * @event space.action
      */
-    function doSpaceAction(UXEvent $e = null) {
-		api::getMsg($e->sender->selected, $this->dot->selected, function ($data) {
+	function doSpaceAction(UXEvent $e = null) {
+		api::getMsg($e->sender->selected, $this->dot->selected, false, function ($data) {
 			switch ($data['status']) {
 				case 200:
 					$this->threads->items->clear();
@@ -67,13 +150,13 @@ class MainForm extends AbstractForm {
      * @event threads.action
      */
     function doThreadsAction(UXEvent $e = null) {
-		api::getMsg($this->space->selected, $this->dot->selected, function ($data) {
+		api::getMsg($this->space->selected, $this->dot->selected, $this->threads->selected, function ($data) {
 			switch ($data['status']) {
 				case 200:
-					$msgArr = [];
+					$msgArr		=	[];
 					foreach ($data['response'] as $val) {
-						foreach ($val['msg'] as $msg) {
-							array_push($msgArr, trim($msg['txt']));
+						foreach ($val as $msg) {
+							array_push($msgArr, $msg);
 						}
 					}
 					$this->container->content = $this->getMsg($msgArr);
@@ -81,6 +164,36 @@ class MainForm extends AbstractForm {
 			}
 		});
     }
+
+	/**
+     * @event newSkin.action
+     */
+	function doNewSkinAction(UXEvent $e = null) {
+		$this->showPreloader('Ожидание ответа от формы...');
+		$this->form('skin')->showAndWait();
+		$this->hidePreloader();
+	}
+
+    /**
+     * @event theme.construct
+     */
+	function doThemeConstruct(UXEvent $e = null) {
+		$ini = new IniStorage();
+		$ini->path = 'config.ini';
+		$selected = $ini->get('selected', 'skin');
+		foreach ($this->form('skin')->getSkins() as $skin) {
+			$e->sender->items->add($skin);
+			if ($selected == $skin) {
+				$e->sender->selected = $selected;
+			}
+		}
+		if (!$e->sender->selected) {
+			$e->sender->selectedIndex = 0;
+		}
+		if ($e->sender->selectedIndex == 0) {
+			$this->removeSkin->enabled = false;
+		}
+	}
 
 	/**
      * @event send.globalKeyDown-Enter
@@ -103,38 +216,80 @@ class MainForm extends AbstractForm {
      * @event theme.action
      */
     function doThemeAction(UXEvent $e = null) {
+		$ini = new IniStorage();
+		$ini->path = 'config.ini';
+		$ini->set('selected', $e->sender->selected, 'skin');
 		$this->clearStylesheets();
-        switch($e->sender->selectedIndex) {
-			case 1:
-				$this->addStylesheet('app/.theme/bootstrap3.fx.css');
-			break;
-			case 2:
-				$this->addStylesheet('app/.theme/bootstrap2.fx.css');
-			break;
-			case 3:
-				$this->addStylesheet('app/.theme/dark.fx.css');
-			break;
-			case 4:
-				$this->addStylesheet('app/.theme/FlatBee.fx.css');
-			break;
-			case 5:
-				$this->addStylesheet('app/.theme/MistSilver.fx.css');
-			break;
-        }
+		$this->form('skin')->clearStylesheets();
+		if ($e->sender->selected != 'Стандартная') {
+			$this->removeSkin->enabled = true;
+			$this->addStylesheet('./fxml/' . $this->selectedFrameWork . '/.theme/' . $e->sender->selected . '/' . $e->sender->selected . ".fx.css");
+			$this->form('skin')->addStylesheet('./fxml' . $this->selectedFrameWork . '/.theme/' . $e->sender->selected . '/' . $e->sender->selected . ".fx.css");
+		} else {
+			$this->removeSkin->enabled = false;
+		}
     }
+
+	/**
+     * @event removeSkin.action
+     */
+    function doRemoveSkinAction(UXEvent $e = null) {
+		if(uiConfirm('Данный скин будет удален навсегда => ' . $this->theme->selected)) {
+			fs::clean('src/fxml/' . $this->selectedFrameWork . '/.theme/' . $this->theme->selected);
+			fs::delete('./src/fxml/' . $this->selectedFrameWork . '/.theme/' . $this->theme->selected);
+			$this->theme->items->remove($this->theme->selected);
+			$this->toast('Успешно :)');
+		}
+	}
 
 	/**
 	 * Возвращаем созданное сообщение
 	 * ------------------------------
+	 * msg		-	Сообщение
 	 */
-	public function getMsg (array $msg) {
+	public function getMsg ($msg) {
 		$this->vbox->children->clear();
-		foreach ($msg as $val) {
-			if (!is_array($val)) {
-				$panel	=	new UXPanel();
-				$label	=	new UXLabel($val);
+		foreach ($msg as $data) {
+			$txt	=	trim($data['txt']);
+			$photo	=	$data['file']['photo'];
+			$panel	=	new UXPanel();
+			$panel->maxWidth = 0;
+			//-->Текст
+			if ($txt) {
+				$label	=	new UXLabel($txt);
+				$label->wrapText = true;
 				$label->padding = [5, 5, 5, 5];
 				$panel->add($label);
+			}
+			//-->Загрузка картинки
+			if ($this->img->selected) {
+				$grid			=	new UXFlowPane();
+				$grid->alignment=	"TOP_LEFT";
+				$grid->hgap		=	5;
+				$grid->vgap		=	5;
+				$grid->padding	=	[5, 5, 5, 5];
+				foreach ($photo as $img) {
+					$img = trim($img);
+					if ($img) {
+						$this->showPreloader('Загрузка изоброжение...');
+						$border				=	new UXPanel();
+						$foo				=	new UXImageArea();
+						$foo->position		=	[5, 5];
+						$foo->stretch		=	true;
+						$foo->proportional	=	true;
+						$border->maxHeight = 0;
+						$border->maxWidth = 0;
+						Element::loadContentAsync($foo, $img, function () use ($border, $foo) {
+							$foo->size			=	[320, 320];
+							$this->hidePreloader();
+							$border->add($foo);
+						});
+						$grid->add($border);
+					}
+				}
+				$panel->add($grid);
+			}
+			if ($panel->children->count > 1) {
 				$this->vbox->add($panel);
 			}
 		}

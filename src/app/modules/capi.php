@@ -1,6 +1,7 @@
 <?php
 namespace app\modules;
-use std, gui, framework, app;
+
+use std, gui, framework;
 use php\format\JsonProcessor;
 use Exception;
 
@@ -62,11 +63,13 @@ class capi {
 			if ($opt) {
 				unset($options);
 				foreach ($opt as $func => $val) {
-					$i++;
-					$val = str::replace($val, ' ', '+');
-					$options .= "$func=$val";
-					if (count($opt) != $i) {
-						$options .= '&';
+					if (trim($val)) {
+						$i++;
+						$val = str::replace($val, ' ', '+');
+						$options .= "$func=$val";
+						if (count($opt) != $i) {
+							$options .= '&';
+						}
 					}
 				}
 				$r = fs::get("http://s2s5.space/$api/$permission/$req?$options");
@@ -149,12 +152,15 @@ class capi {
 	}
 
 	/**
- 	 * Возвращаем все нити в сообщение (callback)
- 	 * --------------------
+ 	 * Возвращаем все нити в сообщение или определенную (callback)
+ 	 * -----------------------------------------------------------
+	 * space	-	Пространство
+	 * dot		-	Точка
+	 * selected	-	Выбранная нить
  	 * @return string
  	 */
-	static function getMsg ($space = null, $dot = null, $callback = null) {
-		capi::request('getMsg', ['space' => $space, 'dot' => $dot], function ($data) use ($callback) {
+	static function getMsg ($space, $dot, $selected = false, $callback = null) {
+		capi::request('getMsg', ['space' => $space, 'dot' => $dot, 'selected' => $selected], function ($data) use ($callback) {
 			if (is_callable($callback)) {
 				$callback($data);
 			}
@@ -165,6 +171,7 @@ class capi {
 	 * Отправка сообщение в нить (callback)
 	 */
 	static function sendThreads ($threads = null, $txt, $callback = null) {
+		$txt = str::decode($txt, 'UTF-8');
 		capi::request('SendMsg', ['threads' => $threads, 'txt' => $txt], function ($data) use ($callback) {
 			if (is_callable($callback)) {
 				$callback($data);

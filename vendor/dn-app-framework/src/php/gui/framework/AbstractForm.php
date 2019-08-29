@@ -98,16 +98,13 @@ abstract class AbstractForm extends UXForm
      */
     private $resourcePath;
 
-    /**
-     * @param UXForm $origin
-     * @param bool $loadEvents
-     * @param bool $loadBehaviours
-     */
-    public function __construct(UXForm $origin = null, $loadEvents = true, $loadBehaviours = true)
+    public function __construct(UXForm $origin = null, $loadEvents = true, $loadBehaviours = true) 
     {
+		$this->construct();
         parent::__construct($origin);
 
         $this->_app = Application::get();
+
         $this->loadConfig(null, false);
 
         $this->loadDesign();
@@ -884,7 +881,7 @@ abstract class AbstractForm extends UXForm
             }
         }
 
-        $class = 'Error';
-        throw new $class("Unable to call " . get_class($this) . "::" . $name . "() method");
+        //$class = 'Error';
+        //throw new $class("Unable to call " . get_class($this) . "::" . $name . "() method");
     }
 }
