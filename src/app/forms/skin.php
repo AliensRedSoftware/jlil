@@ -11,6 +11,8 @@ class skin extends AbstractForm {
      * @event skin.keyDown-Enter
      */
     function doSkinKeyDownEnter(UXKeyEvent $e = null) {
+		$bootstrap = new \\\bootstrap();
+		$framework = $bootstrap->getFrameWork();
 		if ($e->sender->text) {
 			$skins = str::split($e->sender->text, '/');
 			$skn = str::split($skins[count($skins) - 1], '.');
@@ -25,8 +27,8 @@ class skin extends AbstractForm {
 					UXDialog::showAndWait('Стиль не найден :(', 'ERROR');
 					return;
 				}
-				mkdir('./src/app/.theme/' . $skn[0], 0777);
-				fs::copy($e->sender->text, './src/app/.theme/' . $skn[0] . '/' . $skn[0] . '.fx.css');
+				mkdir('./skins/' . $framework . '/' . $skn[0], 0777);
+				fs::copy($e->sender->text, './skins/' . $framework . '/' . $skn[0] . '/' . $skn[0] . '.fx.css');
 				$this->form('MainForm')->toast("Скин успешно установлен => " . $skn[0]);
 				$this->form('MainForm')->theme->items->add($skn[0]);
 				$this->form('MainForm')->theme->selected = $skn[0];
@@ -34,12 +36,12 @@ class skin extends AbstractForm {
 					foreach ($this->list->items->toArray() as $val) {
 						$url	=	$val;
 						$val	=	str::split($val, '/');
-						fs::copy($url, './src/app/.theme/' . $skn[0] . '/' . $val[count($val) - 1]);
+						fs::copy($url, './skins/' . $framework . '/' . $skn[0] . '/' . $val[count($val) - 1]);
 					}
 				}
 				$this->hide();
 			} catch (Exception $e) {
-				fs::delete('./src/app/.theme/' . $skn[0]);
+				fs::delete('./skins/' . $framework . '/' . $skn[0]);
 				UXDialog::showAndWait('Стиль не найден :(', 'ERROR');
 			}
 		} else {
@@ -96,9 +98,8 @@ class skin extends AbstractForm {
 	public function getSkins() {
 		$bootstrap = new \\\bootstrap();
 		$framework = $bootstrap->getFrameWork();
-		pre($framework);
 		$arr = [];
-		$files = fs::scan('./src/app/fxml/' . $framework . '/.theme', ['excludeFiles' => true]);
+		$files = fs::scan('./skins/' . $framework . '/', ['excludeFiles' => true]);
 		foreach ($files as $file) {
 			$skins = str::split($file, '/');
 			array_push($arr, $skins[count($skins) - 1]);

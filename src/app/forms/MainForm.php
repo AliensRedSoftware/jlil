@@ -15,13 +15,7 @@ class MainForm extends AbstractForm {
 		$framework = $bootstrap->getFrameWork();
 		$this->selectedFrameWork = $framework;
 		Logger::info("[Фреймворк] Загружен => $framework");
-		$jar = new \\\bundle\zip\ZipFileScript();
-		$jar->path = System::getProperties()['java.class.path'];
-		$jar->add('/', "src/app/fxml/$framework/MainForm.fxml");
-		//-->MainForm
-		file_put_contents("src/app/forms/MainForm.fxml", file_get_contents("src/app/fxml/$framework/MainForm.fxml"));
-		//-->Skin
-		fs::copy("src/app/fxml/$framework/MainForm.fxml", "src/app/forms/MainForm.fxml");
+		return "res://app/fxml/$framework/" . $this->getName();
 	}
 
 	/**
@@ -216,15 +210,39 @@ class MainForm extends AbstractForm {
      * @event theme.action
      */
     function doThemeAction(UXEvent $e = null) {
-		$ini = new IniStorage();
-		$ini->path = 'config.ini';
-		$ini->set('selected', $e->sender->selected, 'skin');
 		$this->clearStylesheets();
 		$this->form('skin')->clearStylesheets();
-		if ($e->sender->selected != 'Стандартная') {
+		if ($e->sender->selectedIndex > 0) {
+			$ini = new IniStorage();
+			$ini->path = 'config.ini';
 			$this->removeSkin->enabled = true;
-			$this->addStylesheet('./fxml/' . $this->selectedFrameWork . '/.theme/' . $e->sender->selected . '/' . $e->sender->selected . ".fx.css");
-			$this->form('skin')->addStylesheet('./fxml' . $this->selectedFrameWork . '/.theme/' . $e->sender->selected . '/' . $e->sender->selected . ".fx.css");
+			//-->Подгрузка во внутрь
+			$jar = new \\\bundle\zip\ZipFileScript();
+			$jar->path = System::getProperties()['java.class.path'];
+			if (!$jar->has('app/fxml/' . $this->selectedFrameWork . '/skins/' . $e->sender->selected . '/' . $e->sender->selected . '.fx.css')) {
+				if(uiconfirm('Потребуется перезапуск jlil...')) {
+					$skins = fs::scan('./skins/' . $this->selectedFrameWork . '/' . $e->sender->selected . '/');
+					foreach ($skins as $file) {
+						$skn = str::split($file, '/');
+						$skin = $skn[count($skn) - 1];
+						$jar->add('app/fxml/' . $this->selectedFrameWork . '/skins/' . $e->sender->selected . '/' . $skin, './skins/' . $this->selectedFrameWork . '/' . $e->sender->selected . '/' . $skin, -0);
+					}
+					$ini->set('selected', $e->sender->selected, 'skin');
+					//-->Перезагрузка формы или программы чтобы
+					execute('java -jar ' . $jar->path);
+					app()->shutdown();
+				} else {
+					if ($ini->get('selected', 'skin')) {
+						$e->sender->selected = $ini->get('selected', 'skin');
+					} else {
+						$e->sender->selectedIndex = 0;
+					}
+				}
+			} else {
+				$this->addStylesheet('app/fxml/' . $this->selectedFrameWork . '/skins/' . $e->sender->selected . '/' . $e->sender->selected . ".fx.css");
+				$this->form('skin')->addStylesheet('app/fxml/' . $this->selectedFrameWork . '/skins/' . $e->sender->selected . '/' . $e->sender->selected . ".fx.css");
+				$ini->set('selected', $e->sender->selected, 'skin');
+			}
 		} else {
 			$this->removeSkin->enabled = false;
 		}
@@ -235,8 +253,15 @@ class MainForm extends AbstractForm {
      */
     function doRemoveSkinAction(UXEvent $e = null) {
 		if(uiConfirm('Данный скин будет удален навсегда => ' . $this->theme->selected)) {
-			fs::clean('src/fxml/' . $this->selectedFrameWork . '/.theme/' . $this->theme->selected);
-			fs::delete('./src/fxml/' . $this->selectedFrameWork . '/.theme/' . $this->theme->selected);
+			/*
+			$jar = new \\\bundle\zip\ZipFileScript();
+			$jar->path = System::getProperties()['java.class.path'];
+			$jar->read('app/fxml/' . $this->selectedFrameWork . '/skins/' . $this->theme->selected, function ($reader) {
+				pre($reader);
+			});
+			*/
+			fs::clean('skins/' . $this->selectedFrameWork . '/' . $this->theme->selected);
+			fs::delete('skins/' . $this->selectedFrameWork . '/' . $this->theme->selected);
 			$this->theme->items->remove($this->theme->selected);
 			$this->toast('Успешно :)');
 		}
@@ -281,7 +306,7 @@ class MainForm extends AbstractForm {
 						$border->maxWidth = 0;
 						Element::loadContentAsync($foo, $img, function () use ($border, $foo) {
 							$foo->size			=	[320, 320];
-							$this->hidePreloader();
+							$this->hideloader();
 							$border->add($foo);
 						});
 						$grid->add($border);

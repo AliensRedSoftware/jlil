@@ -229,6 +229,7 @@ abstract class UXWindow
      */
     public function addStylesheet($path)
     {
+		
     }
 
     /**

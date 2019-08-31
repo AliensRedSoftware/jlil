@@ -512,11 +512,13 @@ class Application
 
     public function addStyle($resource)
     {
+		var_dump($resource);
         $this->styles[$resource] = $resource;
     }
 
     public function getStyles()
     {
+		var_dump($this->styles);
         return $this->styles;
     }
 

@@ -100,14 +100,14 @@ abstract class AbstractForm extends UXForm
 
     public function __construct(UXForm $origin = null, $loadEvents = true, $loadBehaviours = true) 
     {
-		$this->construct();
+		$design = $this->construct();
         parent::__construct($origin);
 
         $this->_app = Application::get();
 
         $this->loadConfig(null, false);
 
-        $this->loadDesign();
+        $this->loadDesign($design);
 
         $this->eventBinder = new EventBinder(null, $this);
 
@@ -596,20 +596,22 @@ abstract class AbstractForm extends UXForm
         });
     }
 
-    protected function loadDesign()
+    protected function loadDesign($path = false)
     {
         $loader = new UXLoader();
-
-        $path = $this->getResourcePath() . '.fxml';
-
+		if (!$path) {
+			$path = $this->getResourcePath() . '.fxml';
+		} else {
+			$path = $path . '.fxml';
+		}
         Stream::tryAccess($path, function (Stream $stream) use ($loader) {
             try {
                 $this->layout = $loader->load($stream);
             } catch (IOException $e) {
                 throw new IOException("Unable to load {$stream->getPath()}, {$e->getMessage()}");
             }
-
             if ($this->layout) {
+
                 $clones = [];
                 $datas = [];
 
