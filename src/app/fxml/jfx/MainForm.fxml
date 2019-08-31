@@ -1,163 +1,171 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?import javafx.scene.*?><?import javafx.collections.*?><?import javafx.scene.layout.*?><?import javafx.scene.control.*?><?import javafx.scene.text.*?><?import javafx.scene.image.*?><?import javafx.scene.shape.*?><?import javafx.scene.paint.*?><?import javafx.scene.web.*?><?import javafx.geometry.*?><?import java.lang.*?><?import org.develnext.jphp.ext.javafx.classes.data.*?><?import org.develnext.jphp.ext.javafx.support.*?><?import org.develnext.jphp.ext.javafx.support.control.*?><?import org.develnext.jphp.ext.game.support.*?><AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" focusTraversable="false" id="" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480" prefWidth="312" styleClass="">
+<?import javafx.scene.*?><?import javafx.collections.*?><?import javafx.scene.layout.*?><?import javafx.scene.control.*?><?import javafx.scene.text.*?><?import javafx.scene.image.*?><?import javafx.scene.shape.*?><?import javafx.scene.paint.*?><?import javafx.scene.web.*?><?import javafx.geometry.*?><?import java.lang.*?><?import org.develnext.jphp.ext.javafx.classes.data.*?><?import org.develnext.jphp.ext.javafx.support.*?><?import org.develnext.jphp.ext.javafx.support.control.*?><?import org.develnext.jphp.ext.game.support.*?><AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" focusTraversable="false" id="" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480" prefWidth="320" styleClass="">
   <children>
-    <VBox AnchorPane.bottomAnchor="8" AnchorPane.leftAnchor="8" AnchorPane.rightAnchor="8" AnchorPane.topAnchor="8" alignment="TOP_LEFT" focusTraversable="false" id="vbox3" layoutX="8" layoutY="8" maxHeight="-1" maxWidth="-1" minHeight="-1" minWidth="-1" prefHeight="464" prefWidth="296" spacing="5" styleClass="">
+    <Panel AnchorPane.bottomAnchor="19" AnchorPane.leftAnchor="16" AnchorPane.topAnchor="16" backgroundColor="#ffffff" borderColor="#c0c0c0" borderRadius="0" borderStyle="SOLID" borderWidth="0" focusTraversable="false" id="panel" layoutX="16" layoutY="16" maxHeight="-1" maxWidth="-1" minHeight="-1" minWidth="-1" prefHeight="445" prefWidth="288" styleClass="" titleColor="#333333" titleOffset="15" titlePosition="TOP_LEFT">
       <children>
-        <HBox AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="32" alignment="CENTER_LEFT" focusTraversable="false" id="hbox6" layoutX="0" layoutY="0" maxHeight="-1" maxWidth="-1" minHeight="-1" minWidth="-1" prefHeight="25" prefWidth="296" spacing="5" styleClass="">
+        <VBox AnchorPane.bottomAnchor="5" AnchorPane.leftAnchor="-1" AnchorPane.rightAnchor="2" AnchorPane.topAnchor="-1" alignment="CENTER" focusTraversable="false" id="vbox3" layoutX="-1" layoutY="-1" maxHeight="-1" maxWidth="-1" minHeight="-1" minWidth="-1" prefHeight="441" prefWidth="287" spacing="5" styleClass="">
           <children>
-            <com.jfoenix.controls.JFXComboBox editable="false" focusColor="#4059a9" focusTraversable="true" id="framework" labelFloat="" layoutX="0" layoutY="0" prefHeight="25" prefWidth="1.0E16" promptText="" unFocusColor="#4d4d4d" value="awt" visibleRowCount="10">
-              <items xmlns:fx="http://javafx.com/fxml">
-                <FXCollections fx:factory="observableArrayList">
-                  <String fx:value="awt"/>
-                  <String fx:value="jfx"/>
-                </FXCollections>
-              </items>
-              <styleClass xmlns:fx="http://javafx.com/fxml">
-                <String fx:value="combo-box-base"/>
-                <String fx:value="combo-box"/>
-                <String fx:value="jfx-combo-box"/>
-              </styleClass>
-            </com.jfoenix.controls.JFXComboBox>
-            <Data cursor="DEFAULT" enabled="1" id="data-framework" visible="1"/>
-          </children>
-        </HBox>
-        <HBox AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="32" alignment="CENTER_LEFT" focusTraversable="false" id="hbox3" layoutX="0" layoutY="30" maxHeight="-1" maxWidth="-1" minHeight="-1" minWidth="-1" prefHeight="25" prefWidth="296" spacing="5" styleClass="">
-          <children>
-            <com.jfoenix.controls.JFXComboBox editable="false" focusColor="#4059a9" focusTraversable="true" id="theme" labelFloat="" layoutX="0" layoutY="0" prefHeight="16" prefWidth="1.0E16" promptText="" unFocusColor="#4d4d4d" value="Стандартная" visibleRowCount="10">
-              <items xmlns:fx="http://javafx.com/fxml">
-                <FXCollections fx:factory="observableArrayList">
-                  <String fx:value="Стандартная"/>
-                </FXCollections>
-              </items>
-              <styleClass xmlns:fx="http://javafx.com/fxml">
-                <String fx:value="combo-box-base"/>
-                <String fx:value="combo-box"/>
-                <String fx:value="jfx-combo-box"/>
-              </styleClass>
-            </com.jfoenix.controls.JFXComboBox>
-            <Data cursor="DEFAULT" enabled="1" id="data-theme" visible="1"/>
-            <com.jfoenix.controls.JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="LEFT" ellipsisString="..." focusTraversable="true" graphicTextGap="4" id="removeSkin" layoutX="242" layoutY="0" prefHeight="32" prefWidth="144" style="-fx-background-color: white;" styleClass="button jfx-button " text="-" textAlignment="LEFT" underline="false" wrapText="false">
-              <font>
-                <Font name="System Regular" size="13"/>
-              </font>
-            </com.jfoenix.controls.JFXButton>
-            <com.jfoenix.controls.JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="LEFT" ellipsisString="..." focusTraversable="true" graphicTextGap="4" id="newSkin" layoutX="270" layoutY="0" prefHeight="32" prefWidth="144" style="-fx-background-color: white;" styleClass="button jfx-button " text="+" textAlignment="LEFT" underline="false" wrapText="false">
-              <font>
-                <Font name="System Regular" size="13"/>
-              </font>
-            </com.jfoenix.controls.JFXButton>
-            <Data cursor="DEFAULT" enabled="1" id="data-newSkin" visible="1"/>
-            <Data cursor="DEFAULT" enabled="1" id="data-removeSkin" visible="1"/>
-          </children>
-        </HBox>
-        <Data cursor="DEFAULT" enabled="1" id="data-hbox3" visible="1"/>
-        <HBox AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="32" alignment="CENTER_LEFT" focusTraversable="false" id="hbox4" layoutX="0" layoutY="60" maxHeight="-1" maxWidth="-1" minHeight="-1" minWidth="-1" prefHeight="25" prefWidth="296" spacing="5" styleClass="">
-          <children>
-            <com.jfoenix.controls.JFXComboBox editable="false" focusColor="#4059a9" focusTraversable="true" id="dot" labelFloat="" layoutX="0" layoutY="0" prefHeight="25" prefWidth="9.99999999999999E14" promptText="" unFocusColor="#4d4d4d" value="" visibleRowCount="10">
-              <items xmlns:fx="http://javafx.com/fxml">
-                <FXCollections fx:factory="observableArrayList"/>
-              </items>
-              <styleClass xmlns:fx="http://javafx.com/fxml">
-                <String fx:value="combo-box-base"/>
-                <String fx:value="combo-box"/>
-                <String fx:value="jfx-combo-box"/>
-              </styleClass>
-            </com.jfoenix.controls.JFXComboBox>
-            <com.jfoenix.controls.JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="TEXT_ONLY" ellipsisString="..." focusTraversable="true" graphicTextGap="0" id="copyDot" layoutX="268" layoutY="0" prefHeight="32" prefWidth="144" style="-fx-background-color: white;" styleClass="button jfx-button " text="C" textAlignment="CENTER" underline="false" wrapText="false">
-              <font>
-                <Font name="System Regular" size="13"/>
-              </font>
-            </com.jfoenix.controls.JFXButton>
-            <Data cursor="DEFAULT" enabled="1" id="data-dot" visible="1"/>
-            <Data cursor="DEFAULT" enabled="1" id="data-copyDot" visible="1"/>
-          </children>
-        </HBox>
-        <Data cursor="DEFAULT" enabled="1" id="data-hbox4" visible="1"/>
-        <HBox AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="32" alignment="CENTER_LEFT" focusTraversable="false" id="hbox" layoutX="0" layoutY="90" maxHeight="-1" maxWidth="-1" minHeight="-1" minWidth="-1" prefHeight="25" prefWidth="296" spacing="5" styleClass="">
-          <children>
-            <com.jfoenix.controls.JFXComboBox editable="false" focusColor="#4059a9" focusTraversable="true" id="space" labelFloat="" layoutX="0" layoutY="0" prefHeight="16" prefWidth="9.99999999999999E14" promptText="" unFocusColor="#4d4d4d" value="" visibleRowCount="10">
-              <items xmlns:fx="http://javafx.com/fxml">
-                <FXCollections fx:factory="observableArrayList"/>
-              </items>
-              <styleClass xmlns:fx="http://javafx.com/fxml">
-                <String fx:value="combo-box-base"/>
-                <String fx:value="combo-box"/>
-                <String fx:value="jfx-combo-box"/>
-              </styleClass>
-            </com.jfoenix.controls.JFXComboBox>
-            <Data cursor="DEFAULT" enabled="1" id="data-space" visible="1"/>
-            <com.jfoenix.controls.JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="TEXT_ONLY" ellipsisString="..." focusTraversable="true" graphicTextGap="0" id="copySpace" layoutX="268" layoutY="0" prefHeight="32" prefWidth="144" style="-fx-background-color: white;" styleClass="button jfx-button " text="C" textAlignment="CENTER" underline="false" wrapText="false">
-              <font>
-                <Font name="System Regular" size="13"/>
-              </font>
-            </com.jfoenix.controls.JFXButton>
-            <Data cursor="DEFAULT" enabled="1" id="data-copySpace" visible="1"/>
-          </children>
-        </HBox>
-        <Data cursor="DEFAULT" enabled="1" id="data-hbox" visible="1"/>
-        <HBox AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="32" alignment="CENTER_LEFT" focusTraversable="false" id="hboxAlt" layoutX="0" layoutY="120" maxHeight="-1" maxWidth="-1" minHeight="-1" minWidth="-1" prefHeight="25" prefWidth="296" spacing="5" styleClass="">
-          <children>
-            <com.jfoenix.controls.JFXComboBox editable="false" focusColor="#4059a9" focusTraversable="true" id="threads" labelFloat="" layoutX="0" layoutY="0" prefHeight="16" prefWidth="9.99999999999999E14" promptText="" unFocusColor="#4d4d4d" value="" visibleRowCount="10">
-              <items xmlns:fx="http://javafx.com/fxml">
-                <FXCollections fx:factory="observableArrayList"/>
-              </items>
-              <styleClass xmlns:fx="http://javafx.com/fxml">
-                <String fx:value="combo-box-base"/>
-                <String fx:value="combo-box"/>
-                <String fx:value="jfx-combo-box"/>
-              </styleClass>
-            </com.jfoenix.controls.JFXComboBox>
-            <Data cursor="DEFAULT" enabled="1" id="data-threads" visible="1"/>
-            <com.jfoenix.controls.JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="TEXT_ONLY" ellipsisString="..." focusTraversable="true" graphicTextGap="0" id="copythreads" layoutX="268" layoutY="0" prefHeight="32" prefWidth="144" style="-fx-background-color: white;" styleClass="button jfx-button " text="C" textAlignment="CENTER" underline="false" wrapText="false">
-              <font>
-                <Font name="System Regular" size="13"/>
-              </font>
-            </com.jfoenix.controls.JFXButton>
-            <Data cursor="DEFAULT" enabled="1" id="data-copythreads" visible="1"/>
-          </children>
-        </HBox>
-        <Data cursor="DEFAULT" enabled="1" id="data-hboxAlt" visible="1"/>
-        <HBox AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="32" alignment="CENTER_RIGHT" focusTraversable="false" id="hbox5" layoutX="0" layoutY="150" maxHeight="-1" maxWidth="-1" minHeight="-1" minWidth="-1" prefHeight="60" prefWidth="296" spacing="5" styleClass="">
-          <children>
-            <com.jfoenix.controls.JFXToggleButton alignment="CENTER" contentDisplay="LEFT" ellipsisString="Картинки" focusTraversable="true" graphicTextGap="0" id="img" layoutX="172" layoutY="0" prefHeight="32" prefWidth="124" styleClass="toggle-button jfx-toggle-button " text="Картинки" textAlignment="LEFT" toggleColor="#009688" toggleLineColor="#77c2bb" unToggleColor="#fafafa" unToggleLineColor="#999999" underline="false" wrapText="false">
-              <font>
-                <Font name="System Regular" size="13"/>
-              </font>
-            </com.jfoenix.controls.JFXToggleButton>
-            <Data cursor="DEFAULT" enabled="1" id="data-img" tooltipText="Отоброжение картинок" visible="1"/>
-          </children>
-        </HBox>
-        <Data cursor="DEFAULT" enabled="1" id="data-hbox5" visible="1"/>
-        <ScrollPane AnchorPane.bottomAnchor="48" AnchorPane.leftAnchor="8" AnchorPane.rightAnchor="8" AnchorPane.topAnchor="168" fitToHeight="true" fitToWidth="true" focusTraversable="false" hbarPolicy="AS_NEEDED" hvalue="0" id="container" layoutX="0" layoutY="215" prefHeight="99999999" prefWidth="999999999" styleClass="scroll-pane " vbarPolicy="AS_NEEDED" vvalue="0">
-          <content>
-            <AnchorPane focusTraversable="false" id="" maxHeight="-1" maxWidth="-1" minHeight="-1" minWidth="-1" prefHeight="219" prefWidth="296" styleClass="">
+            <HBox AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="32" alignment="CENTER_LEFT" focusTraversable="false" id="hbox6" layoutX="0" layoutY="0" maxHeight="-1" maxWidth="-1" minHeight="-1" minWidth="-1" prefHeight="25" prefWidth="287" spacing="5" styleClass="">
               <children>
-                <VBox AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" alignment="TOP_LEFT" focusTraversable="false" id="vbox" layoutX="0" layoutY="0" maxHeight="-1" maxWidth="-1" minHeight="-1" minWidth="-1" prefHeight="219" prefWidth="296" spacing="5" styleClass="">
-                  <padding>
-                    <Insets bottom="15" left="15" right="15" top="15"/>
-                  </padding>
-                  <children/>
-                </VBox>
-                <Data cursor="DEFAULT" enabled="1" id="data-vbox" visible="1"/>
+                <com.jfoenix.controls.JFXComboBox editable="false" focusColor="#4059a9" focusTraversable="true" id="framework" labelFloat="" layoutX="0" layoutY="0" prefHeight="25" prefWidth="1.0E16" promptText="" unFocusColor="#4d4d4d" value="awt" visibleRowCount="10">
+                  <items xmlns:fx="http://javafx.com/fxml">
+                    <FXCollections fx:factory="observableArrayList">
+                      <String fx:value="awt"/>
+                      <String fx:value="jfx"/>
+                    </FXCollections>
+                  </items>
+                  <styleClass xmlns:fx="http://javafx.com/fxml">
+                    <String fx:value="combo-box-base"/>
+                    <String fx:value="combo-box"/>
+                    <String fx:value="jfx-combo-box"/>
+                  </styleClass>
+                </com.jfoenix.controls.JFXComboBox>
+                <Data cursor="DEFAULT" enabled="1" id="data-framework" visible="1"/>
               </children>
-            </AnchorPane>
-          </content>
-        </ScrollPane>
-        <Data cursor="DEFAULT" enabled="1" id="data-container" visible="1"/>
-        <com.jfoenix.controls.JFXTextField alignment="CENTER_LEFT" editable="true" focusColor="#4059a9" focusTraversable="true" id="send" layoutX="0" layoutY="439" prefColumnCount="12" prefHeight="32" prefWidth="1.0000000000000E+171" promptText="Сообщение..." text="" unFocusColor="#4d4d4d">
-          <font>
-            <Font name="System Regular" size="13"/>
-          </font>
-          <styleClass xmlns:fx="http://javafx.com/fxml">
-            <String fx:value="text-input"/>
-            <String fx:value="text-field"/>
-            <String fx:value="jfx-text-field"/>
-          </styleClass>
-        </com.jfoenix.controls.JFXTextField>
-        <Data cursor="DEFAULT" enabled="1" id="data-send" visible="1"/>
-        <Data cursor="DEFAULT" enabled="1" id="data-hbox6" visible="1"/>
+            </HBox>
+            <HBox AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="32" alignment="CENTER_LEFT" focusTraversable="false" id="hbox3" layoutX="0" layoutY="30" maxHeight="-1" maxWidth="-1" minHeight="-1" minWidth="-1" prefHeight="25" prefWidth="287" spacing="5" styleClass="">
+              <children>
+                <com.jfoenix.controls.JFXComboBox editable="false" focusColor="#4059a9" focusTraversable="true" id="theme" labelFloat="" layoutX="0" layoutY="0" prefHeight="16" prefWidth="1.0E16" promptText="" unFocusColor="#4d4d4d" value="Стандартная" visibleRowCount="10">
+                  <items xmlns:fx="http://javafx.com/fxml">
+                    <FXCollections fx:factory="observableArrayList">
+                      <String fx:value="Стандартная"/>
+                    </FXCollections>
+                  </items>
+                  <styleClass xmlns:fx="http://javafx.com/fxml">
+                    <String fx:value="combo-box-base"/>
+                    <String fx:value="combo-box"/>
+                    <String fx:value="jfx-combo-box"/>
+                  </styleClass>
+                </com.jfoenix.controls.JFXComboBox>
+                <Data cursor="DEFAULT" enabled="1" id="data-theme" visible="1"/>
+                <com.jfoenix.controls.JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="LEFT" ellipsisString="..." focusTraversable="true" graphicTextGap="4" id="removeSkin" layoutX="232" layoutY="0" prefHeight="32" prefWidth="144" style="-fx-background-color: white;" styleClass="button jfx-button " text="-" textAlignment="LEFT" underline="false" wrapText="false">
+                  <font>
+                    <Font name="System Regular" size="13"/>
+                  </font>
+                </com.jfoenix.controls.JFXButton>
+                <com.jfoenix.controls.JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="LEFT" ellipsisString="..." focusTraversable="true" graphicTextGap="4" id="newSkin" layoutX="260" layoutY="0" prefHeight="32" prefWidth="144" style="-fx-background-color: white;" styleClass="button jfx-button " text="+" textAlignment="LEFT" underline="false" wrapText="false">
+                  <font>
+                    <Font name="System Regular" size="13"/>
+                  </font>
+                </com.jfoenix.controls.JFXButton>
+                <Data cursor="DEFAULT" enabled="1" id="data-newSkin" visible="1"/>
+                <Data cursor="DEFAULT" enabled="1" id="data-removeSkin" visible="1"/>
+              </children>
+            </HBox>
+            <Data cursor="DEFAULT" enabled="1" id="data-hbox3" visible="1"/>
+            <HBox AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="32" alignment="CENTER_LEFT" focusTraversable="false" id="hbox4" layoutX="0" layoutY="60" maxHeight="-1" maxWidth="-1" minHeight="-1" minWidth="-1" prefHeight="25" prefWidth="287" spacing="5" styleClass="">
+              <children>
+                <com.jfoenix.controls.JFXComboBox editable="false" focusColor="#4059a9" focusTraversable="true" id="dot" labelFloat="" layoutX="0" layoutY="0" prefHeight="25" prefWidth="9.99999999999999E14" promptText="" unFocusColor="#4d4d4d" value="" visibleRowCount="10">
+                  <items xmlns:fx="http://javafx.com/fxml">
+                    <FXCollections fx:factory="observableArrayList"/>
+                  </items>
+                  <styleClass xmlns:fx="http://javafx.com/fxml">
+                    <String fx:value="combo-box-base"/>
+                    <String fx:value="combo-box"/>
+                    <String fx:value="jfx-combo-box"/>
+                  </styleClass>
+                </com.jfoenix.controls.JFXComboBox>
+                <com.jfoenix.controls.JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="TEXT_ONLY" ellipsisString="..." focusTraversable="true" graphicTextGap="0" id="copyDot" layoutX="259" layoutY="0" prefHeight="32" prefWidth="144" style="-fx-background-color: white;" styleClass="button jfx-button " text="C" textAlignment="CENTER" underline="false" wrapText="false">
+                  <font>
+                    <Font name="System Regular" size="13"/>
+                  </font>
+                </com.jfoenix.controls.JFXButton>
+                <Data cursor="DEFAULT" enabled="1" id="data-dot" visible="1"/>
+                <Data cursor="DEFAULT" enabled="1" id="data-copyDot" visible="1"/>
+              </children>
+            </HBox>
+            <Data cursor="DEFAULT" enabled="1" id="data-hbox4" visible="1"/>
+            <HBox AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="32" alignment="CENTER_LEFT" focusTraversable="false" id="hbox" layoutX="0" layoutY="90" maxHeight="-1" maxWidth="-1" minHeight="-1" minWidth="-1" prefHeight="25" prefWidth="287" spacing="5" styleClass="">
+              <children>
+                <com.jfoenix.controls.JFXComboBox editable="false" focusColor="#4059a9" focusTraversable="true" id="space" labelFloat="" layoutX="0" layoutY="0" prefHeight="16" prefWidth="9.99999999999999E14" promptText="" unFocusColor="#4d4d4d" value="" visibleRowCount="10">
+                  <items xmlns:fx="http://javafx.com/fxml">
+                    <FXCollections fx:factory="observableArrayList"/>
+                  </items>
+                  <styleClass xmlns:fx="http://javafx.com/fxml">
+                    <String fx:value="combo-box-base"/>
+                    <String fx:value="combo-box"/>
+                    <String fx:value="jfx-combo-box"/>
+                  </styleClass>
+                </com.jfoenix.controls.JFXComboBox>
+                <Data cursor="DEFAULT" enabled="1" id="data-space" visible="1"/>
+                <com.jfoenix.controls.JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="TEXT_ONLY" ellipsisString="..." focusTraversable="true" graphicTextGap="0" id="copySpace" layoutX="259" layoutY="0" prefHeight="32" prefWidth="144" style="-fx-background-color: white;" styleClass="button jfx-button " text="C" textAlignment="CENTER" underline="false" wrapText="false">
+                  <font>
+                    <Font name="System Regular" size="13"/>
+                  </font>
+                </com.jfoenix.controls.JFXButton>
+                <Data cursor="DEFAULT" enabled="1" id="data-copySpace" visible="1"/>
+              </children>
+            </HBox>
+            <Data cursor="DEFAULT" enabled="1" id="data-hbox" visible="1"/>
+            <HBox AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="32" alignment="CENTER_LEFT" focusTraversable="false" id="hboxAlt" layoutX="0" layoutY="120" maxHeight="-1" maxWidth="-1" minHeight="-1" minWidth="-1" prefHeight="25" prefWidth="287" spacing="5" styleClass="">
+              <children>
+                <com.jfoenix.controls.JFXComboBox editable="false" focusColor="#4059a9" focusTraversable="true" id="threads" labelFloat="" layoutX="0" layoutY="0" prefHeight="16" prefWidth="9.99999999999999E14" promptText="" unFocusColor="#4d4d4d" value="" visibleRowCount="10">
+                  <items xmlns:fx="http://javafx.com/fxml">
+                    <FXCollections fx:factory="observableArrayList"/>
+                  </items>
+                  <styleClass xmlns:fx="http://javafx.com/fxml">
+                    <String fx:value="combo-box-base"/>
+                    <String fx:value="combo-box"/>
+                    <String fx:value="jfx-combo-box"/>
+                  </styleClass>
+                </com.jfoenix.controls.JFXComboBox>
+                <Data cursor="DEFAULT" enabled="1" id="data-threads" visible="1"/>
+                <com.jfoenix.controls.JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="TEXT_ONLY" ellipsisString="..." focusTraversable="true" graphicTextGap="0" id="copythreads" layoutX="259" layoutY="0" prefHeight="32" prefWidth="144" style="-fx-background-color: white;" styleClass="button jfx-button " text="C" textAlignment="CENTER" underline="false" wrapText="false">
+                  <font>
+                    <Font name="System Regular" size="13"/>
+                  </font>
+                </com.jfoenix.controls.JFXButton>
+                <Data cursor="DEFAULT" enabled="1" id="data-copythreads" visible="1"/>
+              </children>
+            </HBox>
+            <Data cursor="DEFAULT" enabled="1" id="data-hboxAlt" visible="1"/>
+            <HBox AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="32" alignment="CENTER_RIGHT" focusTraversable="false" id="hbox5" layoutX="0" layoutY="150" maxHeight="-1" maxWidth="-1" minHeight="-1" minWidth="-1" prefHeight="60" prefWidth="287" spacing="5" styleClass="">
+              <children>
+                <com.jfoenix.controls.JFXToggleButton alignment="CENTER" contentDisplay="LEFT" ellipsisString="Картинки" focusTraversable="true" graphicTextGap="0" id="img" layoutX="163" layoutY="0" prefHeight="32" prefWidth="124" styleClass="toggle-button jfx-toggle-button " text="Картинки" textAlignment="LEFT" toggleColor="#009688" toggleLineColor="#77c2bb" unToggleColor="#fafafa" unToggleLineColor="#999999" underline="false" wrapText="false">
+                  <font>
+                    <Font name="System Regular" size="13"/>
+                  </font>
+                </com.jfoenix.controls.JFXToggleButton>
+                <Data cursor="DEFAULT" enabled="1" id="data-img" tooltipText="Отоброжение картинок" visible="1"/>
+              </children>
+            </HBox>
+            <Data cursor="DEFAULT" enabled="1" id="data-hbox5" visible="1"/>
+            <ScrollPane AnchorPane.bottomAnchor="48" AnchorPane.leftAnchor="8" AnchorPane.rightAnchor="8" AnchorPane.topAnchor="168" fitToHeight="true" fitToWidth="true" focusTraversable="false" hbarPolicy="AS_NEEDED" hvalue="0" id="container" layoutX="0" layoutY="215" prefHeight="99999999" prefWidth="999999999" styleClass="scroll-pane " vbarPolicy="AS_NEEDED" vvalue="0">
+              <content>
+                <AnchorPane focusTraversable="false" id="" maxHeight="-1" maxWidth="-1" minHeight="-1" minWidth="-1" prefHeight="196" prefWidth="287" styleClass="">
+                  <children>
+                    <VBox AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" alignment="TOP_LEFT" focusTraversable="false" id="vbox" layoutX="0" layoutY="0" maxHeight="-1" maxWidth="-1" minHeight="-1" minWidth="-1" prefHeight="196" prefWidth="287" spacing="5" styleClass="">
+                      <padding>
+                        <Insets bottom="15" left="15" right="15" top="15"/>
+                      </padding>
+                      <children/>
+                    </VBox>
+                    <Data cursor="DEFAULT" enabled="1" id="data-vbox" visible="1"/>
+                  </children>
+                </AnchorPane>
+              </content>
+            </ScrollPane>
+            <Data cursor="DEFAULT" enabled="1" id="data-container" visible="1"/>
+            <com.jfoenix.controls.JFXTextField alignment="CENTER_LEFT" editable="true" focusColor="#4059a9" focusTraversable="true" id="send" layoutX="0" layoutY="416" prefColumnCount="12" prefHeight="32" prefWidth="1.0000000000000E+171" promptText="Сообщение..." text="" unFocusColor="#4d4d4d">
+              <font>
+                <Font name="System Regular" size="13"/>
+              </font>
+              <styleClass xmlns:fx="http://javafx.com/fxml">
+                <String fx:value="text-input"/>
+                <String fx:value="text-field"/>
+                <String fx:value="jfx-text-field"/>
+              </styleClass>
+            </com.jfoenix.controls.JFXTextField>
+            <Data cursor="DEFAULT" enabled="1" id="data-send" visible="1"/>
+            <Data cursor="DEFAULT" enabled="1" id="data-hbox6" visible="1"/>
+          </children>
+        </VBox>
+        <Data cursor="DEFAULT" enabled="1" id="data-vbox3" visible="1"/>
       </children>
-    </VBox>
-    <Data cursor="DEFAULT" enabled="1" id="data-vbox3" visible="1"/>
+      <titleFont>
+        <Font name="System Regular" size="13"/>
+      </titleFont>
+    </Panel>
+    <Data cursor="DEFAULT" enabled="1" id="data-panel" visible="1"/>
   </children>
 </AnchorPane>

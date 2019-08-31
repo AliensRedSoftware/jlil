@@ -11,10 +11,11 @@ class MainForm extends AbstractForm {
 	public $changedFramework;
 
 	public function construct() {
-		$bootstrap = new \\\bootstrap();
-		$framework = $bootstrap->getFrameWork();
+		$bootstrap	=	new \\\bootstrap();
+		$Name		=	$this->getName();
+		$framework	=	$bootstrap->getFrameWork();
 		$this->selectedFrameWork = $framework;
-		Logger::info("[Фреймворк] Загружен => $framework");
+		Logger::info("[Фреймворк] [$Name] Загружен => $framework");
 		return "res://app/fxml/$framework/" . $this->getName();
 	}
 
@@ -30,6 +31,7 @@ class MainForm extends AbstractForm {
 				$ini->set('framework', $e->sender->selected, 'skin');
 				$this->selectedFrameWork = $framework;
 				$this->free();
+				app()->getForm(skin)->free();
 				app()->showForm($this->getName());
 			} else {
 				$this->framework->selected = $framework;
@@ -45,6 +47,20 @@ class MainForm extends AbstractForm {
     function doFrameworkConstruct(UXEvent $e = null) {
 		$this->framework->selected = $this->selectedFrameWork;
 		$this->changedFramework = true;
+	}
+
+	/**
+     * @event showing
+     */
+    function doShowing(UXWindowEvent $e = null) {
+		switch ($this->selectedFrameWork) {
+			case 'jfx':
+				$this->style = 'TRANSPARENT';
+				$this->layout->backgroundColor = UXColor::of('#000000');
+			break;
+			default:
+			break;
+		}
 	}
 
 	/**

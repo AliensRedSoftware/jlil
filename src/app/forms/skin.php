@@ -2,10 +2,32 @@
 namespace app\forms;
 
 use std, gui, framework;
-use \\\bootstrap;
 use Exception;
 
 class skin extends AbstractForm {
+
+	public function construct() {
+		$bootstrap	=	new \\\bootstrap();
+		$Name		=	$this->getName();
+		$framework	=	$bootstrap->getFrameWork();
+		$this->selectedFrameWork = $framework;
+		Logger::info("[Фреймворк] [$Name] Загружен => $framework");
+		return "res://app/fxml/$framework/" . $this->getName();
+	}
+
+	/**
+     * @event showing
+     */
+    function doShowing(UXWindowEvent $e = null) {
+		switch ($this->selectedFrameWork) {
+			case 'jfx':
+				$this->style = 'TRANSPARENT';
+				$this->layout->backgroundColor = UXColor::of('#000000');
+			break;
+			default:
+			break;
+		}
+	}
 
 	/**
      * @event skin.keyDown-Enter
