@@ -50,13 +50,15 @@ class capi {
  	 * request	-	Имя запроса
 	 * opt 		-	Параметры запроса
 	 */
-	static function request ($req = 'getDot', $opt = [], $callback = null) {
+	static function request ($req = 'getDot', $opt = [], $prealoder = true, $callback = null) {
 		$form = app()->getForm(MainForm);
-		$form->dot->enabled		=	false;
-		$form->space->enabled	=	false;
-		$form->threads->enabled	=	false;
-		$form->send->enabled	=	false;
-		$form->showPreloader('Возвращение...');
+		if ($prealoder) {
+			$form->dot->enabled		=	false;
+			$form->space->enabled	=	false;
+			$form->threads->enabled	=	false;
+			$form->send->enabled	=	false;
+			$form->showPreloader('Возвращение...');
+		}
 		$api		=	capi::getApi();
 		$permission	=	capi::getPermission();
 		(new Thread(function() use ($form, $api, $permission, $req, $opt, $callback) { //Создание потока основного и его запуск
@@ -91,7 +93,7 @@ class capi {
 					}
 				} catch (Exception $e) {
 					$form->showPreloader('Обновление...');
-					waitAsync (5000, function () use ($callback, $r, $req, $opt){
+					waitAsync (1000, function () use ($callback, $r, $req, $opt){
 						capi::request($req, $opt, function ($data) use ($callback, $r){
 							if($data){
 								if (is_callable($callback)) {
@@ -130,8 +132,8 @@ class capi {
 	 * --------------------
  	 * @return string
  	 */
-	static function getDot ($callback = null) {
-		capi::request('getDot', [], function ($data) use ($callback) {
+	static function getDot ($prealoder = true, $callback = null) {
+		capi::request('getDot', [], $prealoder, function ($data) use ($callback) {
 			if (is_callable($callback)) {
 				$callback($data);
 			}
@@ -143,8 +145,8 @@ class capi {
  	 * --------------------
  	 * @return string
  	 */
-	static function getSpace ($dot = null, $callback = null) {
-		capi::request('getSpace', ['dot' => $dot], function ($data) use ($dot, $callback) {
+	static function getSpace ($dot = null, $prealoder = true, $callback = null) {
+		capi::request('getSpace', ['dot' => $dot], $prealoder, function ($data) use ($dot, $callback) {
 			if (is_callable($callback)) {
 				$callback($data);
 			}
@@ -159,8 +161,8 @@ class capi {
 	 * selected	-	Выбранная нить
  	 * @return string
  	 */
-	static function getMsg ($space, $dot, $selected = false, $callback = null) {
-		capi::request('getMsg', ['space' => $space, 'dot' => $dot, 'selected' => $selected], function ($data) use ($callback) {
+	static function getMsg ($space, $dot, $selected = false, $prealoder = true, $callback = null) {
+		capi::request('getMsg', ['space' => $space, 'dot' => $dot, 'selected' => $selected], $prealoder, function ($data) use ($callback) {
 			if (is_callable($callback)) {
 				$callback($data);
 			}
@@ -170,9 +172,9 @@ class capi {
 	/**
 	 * Отправка сообщение в нить (callback)
 	 */
-	static function sendThreads ($threads = null, $txt, $callback = null) {
+	static function sendThreads ($threads = null, $txt, $prealoder = true, $callback = null) {
 		$txt = str::decode($txt, 'UTF-8');
-		capi::request('SendMsg', ['threads' => $threads, 'txt' => $txt], function ($data) use ($callback) {
+		capi::request('SendMsg', ['threads' => $threads, 'txt' => $txt], $prealoder, function ($data) use ($callback) {
 			if (is_callable($callback)) {
 				$callback($data);
 			}

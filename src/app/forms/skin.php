@@ -11,7 +11,7 @@ class skin extends AbstractForm {
 		$Name		=	$this->getName();
 		$framework	=	$bootstrap->getFrameWork();
 		$this->selectedFrameWork = $framework;
-		Logger::info("[Фреймворк] [$Name] Загружен => $framework");
+		Logger::info("[Фреймворк] [$Name] Загружен - $framework =)");
 		return "res://app/fxml/$framework/" . $this->getName();
 	}
 
@@ -21,8 +21,9 @@ class skin extends AbstractForm {
     function doShowing(UXWindowEvent $e = null) {
 		switch ($this->selectedFrameWork) {
 			case 'jfx':
-				$this->style = 'TRANSPARENT';
-				$this->layout->backgroundColor = UXColor::of('#000000');
+				$e->sender->style = 'TRANSPARENT';
+				$e->sender->layout->backgroundColor = UXColor::of('#00000000');
+				$e->sender->transparent = true;
 			break;
 			default:
 			break;

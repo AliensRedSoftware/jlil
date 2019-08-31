@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?import javafx.scene.*?><?import javafx.collections.*?><?import javafx.scene.layout.*?><?import javafx.scene.control.*?><?import javafx.scene.text.*?><?import javafx.scene.image.*?><?import javafx.scene.shape.*?><?import javafx.scene.paint.*?><?import javafx.scene.web.*?><?import javafx.geometry.*?><?import java.lang.*?><?import org.develnext.jphp.ext.javafx.classes.data.*?><?import org.develnext.jphp.ext.javafx.support.*?><?import org.develnext.jphp.ext.javafx.support.control.*?><?import org.develnext.jphp.ext.game.support.*?><AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" focusTraversable="false" id="" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="328" prefWidth="320" styleClass="">
+<?import javafx.scene.*?><?import javafx.collections.*?><?import javafx.scene.layout.*?><?import javafx.scene.control.*?><?import javafx.scene.text.*?><?import javafx.scene.image.*?><?import javafx.scene.shape.*?><?import javafx.scene.paint.*?><?import javafx.scene.web.*?><?import javafx.geometry.*?><?import java.lang.*?><?import org.develnext.jphp.ext.javafx.classes.data.*?><?import org.develnext.jphp.ext.javafx.support.*?><?import org.develnext.jphp.ext.javafx.support.control.*?><?import org.develnext.jphp.ext.game.support.*?><AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" focusTraversable="false" id="" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="320" prefWidth="320" styleClass="">
   <children>
-    <Panel AnchorPane.bottomAnchor="16" AnchorPane.leftAnchor="16" AnchorPane.rightAnchor="16" AnchorPane.topAnchor="16" backgroundColor="#ffffff" borderColor="#c0c0c0" borderRadius="0" borderStyle="SOLID" borderWidth="1" focusTraversable="false" id="panel" layoutX="16" layoutY="16" maxHeight="-1" maxWidth="-1" minHeight="-1" minWidth="-1" prefHeight="296" prefWidth="288" styleClass="" titleColor="#333333" titleOffset="15" titlePosition="TOP_LEFT">
+    <Panel AnchorPane.bottomAnchor="16" AnchorPane.leftAnchor="16" AnchorPane.rightAnchor="16" AnchorPane.topAnchor="16" backgroundColor="#ffffff" borderColor="#c0c0c0" borderRadius="0" borderStyle="SOLID" borderWidth="1" focusTraversable="false" id="panel" layoutX="16" layoutY="16" maxHeight="-1" maxWidth="-1" minHeight="-1" minWidth="-1" prefHeight="288" prefWidth="288" styleClass="" titleColor="#333333" titleOffset="15" titlePosition="TOP_LEFT">
       <children>
-        <VBox AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="-1" AnchorPane.topAnchor="0" alignment="TOP_LEFT" focusTraversable="false" id="vbox" layoutX="1" layoutY="1" maxHeight="-1" maxWidth="-1" minHeight="-1" minWidth="-1" prefHeight="294" prefWidth="287" spacing="5" styleClass="">
+        <VBox AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="-1" AnchorPane.topAnchor="0" alignment="TOP_LEFT" focusTraversable="false" id="vbox" layoutX="1" layoutY="1" maxHeight="-1" maxWidth="-1" minHeight="-1" minWidth="-1" prefHeight="286" prefWidth="287" spacing="5" styleClass="">
           <padding>
             <Insets bottom="10" left="10" right="10" top="10"/>
           </padding>
@@ -36,7 +36,7 @@
                     <String fx:value="jfx-text-field"/>
                   </styleClass>
                 </com.jfoenix.controls.JFXTextField>
-                <com.jfoenix.controls.JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="LEFT" ellipsisString="..." focusTraversable="true" graphicTextGap="4" id="add" layoutX="241" layoutY="0" prefHeight="32" prefWidth="144" style="-fx-background-color: white;" styleClass="button jfx-button " text="+" textAlignment="LEFT" underline="false" wrapText="false">
+                <com.jfoenix.controls.JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="LEFT" ellipsisString="..." focusTraversable="true" graphicTextGap="4" id="add" layoutX="241" layoutY="0" prefHeight="32" prefWidth="144" style="-fx-background-color: white;" styleClass="button jfx-button " text="+" textAlignment="LEFT" textFill="#000000" underline="false" wrapText="false">
                   <font>
                     <Font name="System Regular" size="13"/>
                   </font>
@@ -52,7 +52,7 @@
               </items>
             </ListViewEx>
             <Data cursor="DEFAULT" enabled="1" id="data-list" visible="1"/>
-            <com.jfoenix.controls.JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="LEFT" ellipsisString="..." focusTraversable="true" graphicTextGap="4" id="clear" layoutX="10" layoutY="259" prefHeight="32" prefWidth="9.99999999999E11" style="-fx-background-color: white;" styleClass="button jfx-button " text="Очистить список" textAlignment="LEFT" underline="false" wrapText="false">
+            <com.jfoenix.controls.JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="LEFT" ellipsisString="..." focusTraversable="true" graphicTextGap="4" id="clear" layoutX="10" layoutY="251" prefHeight="32" prefWidth="9.99999999999E11" style="-fx-background-color: white;" styleClass="button jfx-button " text="Очистить список" textAlignment="LEFT" textFill="#000000" underline="false" wrapText="false">
               <font>
                 <Font name="System Regular" size="13"/>
               </font>

@@ -1,5 +1,5 @@
 name: jlil
-version: 1.0.4b2
+version: 1.0.6
 description: Client s2s5
 deps:
   jphp-core: '*'

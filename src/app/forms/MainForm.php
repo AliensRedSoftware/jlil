@@ -15,7 +15,7 @@ class MainForm extends AbstractForm {
 		$Name		=	$this->getName();
 		$framework	=	$bootstrap->getFrameWork();
 		$this->selectedFrameWork = $framework;
-		Logger::info("[Фреймворк] [$Name] Загружен => $framework");
+		Logger::info("[Фреймворк] [$Name] Загружен - $framework =)");
 		return "res://app/fxml/$framework/" . $this->getName();
 	}
 
@@ -55,8 +55,9 @@ class MainForm extends AbstractForm {
     function doShowing(UXWindowEvent $e = null) {
 		switch ($this->selectedFrameWork) {
 			case 'jfx':
-				$this->style = 'TRANSPARENT';
-				$this->layout->backgroundColor = UXColor::of('#000000');
+				$e->sender->style = 'TRANSPARENT';
+				$e->sender->layout->backgroundColor = UXColor::of('#00000000');
+				$e->sender->transparent = true;
 			break;
 			default:
 			break;
@@ -71,7 +72,7 @@ class MainForm extends AbstractForm {
 		//-->API...
 		api::setApi('capi');
 		api::setPermission('system');
-		api::getDot(function ($dot) {
+		api::getDot(true, function ($dot) {
 			switch ($dot['status']) {
 				case 200:
 					foreach ($dot['response'] as $val) {
@@ -81,7 +82,6 @@ class MainForm extends AbstractForm {
 				break;
 			}
 		});
-
 	}
 
 	/**
@@ -122,7 +122,7 @@ class MainForm extends AbstractForm {
      * @event space.action
      */
 	function doSpaceAction(UXEvent $e = null) {
-		api::getMsg($e->sender->selected, $this->dot->selected, false, function ($data) {
+		api::getMsg($e->sender->selected, $this->dot->selected, false, true, function ($data) {
 			switch ($data['status']) {
 				case 200:
 					$this->threads->items->clear();
@@ -141,7 +141,7 @@ class MainForm extends AbstractForm {
      * @event dot.action
      */
     function doDotAction(UXEvent $e = null) {
-		api::getSpace($e->sender->selected, function ($data) {
+		api::getSpace($e->sender->selected, true, function ($data) {
 			switch ($data['status']) {
 				case 200:
 					$this->space->items->clear();
@@ -159,17 +159,12 @@ class MainForm extends AbstractForm {
 	/**
      * @event threads.action
      */
-    function doThreadsAction(UXEvent $e = null) {
-		api::getMsg($this->space->selected, $this->dot->selected, $this->threads->selected, function ($data) {
+    function doThreadsAction(UXEvent $e = null, $prealoder = true) {
+		api::getMsg($this->space->selected, $this->dot->selected, $this->threads->selected, $prealoder, function ($data) use ($e) {
 			switch ($data['status']) {
 				case 200:
-					$msgArr		=	[];
-					foreach ($data['response'] as $val) {
-						foreach ($val as $msg) {
-							array_push($msgArr, $msg);
-						}
-					}
-					$this->container->content = $this->getMsg($msgArr);
+					$this->container->content = $this->getMsg($data['response']['msg']);
+					$this->doThreadsAction($e, false);
 				break;
 			}
 		});
@@ -296,7 +291,7 @@ class MainForm extends AbstractForm {
 			$panel	=	new UXPanel();
 			$panel->maxWidth = 0;
 			//-->Текст
-			if ($txt) {
+			if (!empty($txt)) {
 				$label	=	new UXLabel($txt);
 				$label->wrapText = true;
 				$label->padding = [5, 5, 5, 5];
@@ -322,7 +317,7 @@ class MainForm extends AbstractForm {
 						$border->maxWidth = 0;
 						Element::loadContentAsync($foo, $img, function () use ($border, $foo) {
 							$foo->size			=	[320, 320];
-							$this->hideloader();
+							$this->hidePreloader();
 							$border->add($foo);
 						});
 						$grid->add($border);
@@ -330,7 +325,7 @@ class MainForm extends AbstractForm {
 				}
 				$panel->add($grid);
 			}
-			if ($panel->children->count > 1) {
+			if ($panel->children->count >= 2) {
 				$this->vbox->add($panel);
 			}
 		}
