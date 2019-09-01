@@ -122,18 +122,8 @@
               </children>
             </HBox>
             <Data cursor="DEFAULT" enabled="1" id="data-hboxAlt" visible="1"/>
-            <HBox AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="32" alignment="CENTER_RIGHT" focusTraversable="false" id="hbox5" layoutX="5" layoutY="155" maxHeight="-1" maxWidth="-1" minHeight="-1" minWidth="-1" prefHeight="18" prefWidth="275" spacing="5" styleClass="">
-              <children>
-                <com.jfoenix.controls.JFXCheckBox alignment="CENTER_LEFT" checkedColor="#0f9d58" contentDisplay="LEFT" ellipsisString="..." focusTraversable="true" graphicTextGap="4" id="img" layoutX="193" layoutY="0" prefHeight="18" prefWidth="80" styleClass="check-box jfx-check-box " text="Картинки" textAlignment="LEFT" unCheckedColor="#5a5a5a" underline="false" wrapText="false">
-                  <font>
-                    <Font name="System Regular" size="13"/>
-                  </font>
-                </com.jfoenix.controls.JFXCheckBox>
-                <Data cursor="DEFAULT" enabled="1" id="data-img" tooltipText="Отоброжение картинок" visible="1"/>
-              </children>
-            </HBox>
             <Data cursor="DEFAULT" enabled="1" id="data-hbox5" visible="1"/>
-            <ScrollPane AnchorPane.bottomAnchor="48" AnchorPane.leftAnchor="8" AnchorPane.rightAnchor="8" AnchorPane.topAnchor="168" fitToHeight="true" fitToWidth="true" focusTraversable="false" hbarPolicy="AS_NEEDED" hvalue="0" id="container" layoutX="5" layoutY="178" prefHeight="99999999" prefWidth="999999999" styleClass="scroll-pane " vbarPolicy="AS_NEEDED" vvalue="0">
+            <ScrollPane AnchorPane.bottomAnchor="48" AnchorPane.leftAnchor="8" AnchorPane.rightAnchor="8" AnchorPane.topAnchor="168" fitToHeight="true" fitToWidth="true" focusTraversable="false" hbarPolicy="AS_NEEDED" hvalue="0" id="container" layoutX="5" layoutY="155" prefHeight="99999999" prefWidth="999999999" styleClass="scroll-pane " vbarPolicy="AS_NEEDED" vvalue="0">
               <content>
                 <AnchorPane focusTraversable="false" id="" maxHeight="-1" maxWidth="-1" minHeight="-1" minWidth="-1" prefHeight="229" prefWidth="275" styleClass="">
                   <children>
@@ -149,7 +139,7 @@
               </content>
             </ScrollPane>
             <Data cursor="DEFAULT" enabled="1" id="data-container" visible="1"/>
-            <com.jfoenix.controls.JFXTextField alignment="CENTER_LEFT" editable="true" focusColor="#4059a9" focusTraversable="true" id="send" layoutX="5" layoutY="412" prefColumnCount="12" prefHeight="32" prefWidth="1.0000000000000E+171" promptText="Сообщение..." text="" unFocusColor="#4d4d4d">
+            <com.jfoenix.controls.JFXTextField alignment="CENTER_LEFT" editable="true" focusColor="#4059a9" focusTraversable="true" id="send" layoutX="5" layoutY="389" prefColumnCount="12" prefHeight="32" prefWidth="1.0000000000000E+171" promptText="Сообщение..." text="" unFocusColor="#4d4d4d">
               <font>
                 <Font name="System Regular" size="13"/>
               </font>
@@ -159,6 +149,22 @@
                 <String fx:value="jfx-text-field"/>
               </styleClass>
             </com.jfoenix.controls.JFXTextField>
+            <HBox AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="32" alignment="CENTER_RIGHT" focusTraversable="false" id="hbox5" layoutX="5" layoutY="419" maxHeight="-1" maxWidth="-1" minHeight="-1" minWidth="-1" prefHeight="18" prefWidth="275" spacing="5" styleClass="">
+              <children>
+                <com.jfoenix.controls.JFXCheckBox alignment="CENTER_LEFT" checkedColor="#0f9d58" contentDisplay="LEFT" ellipsisString="..." focusTraversable="true" graphicTextGap="4" id="update" layoutX="12" layoutY="0" prefHeight="18" prefWidth="176" styleClass="check-box jfx-check-box " text="Обновление сообщение" textAlignment="LEFT" unCheckedColor="#5a5a5a" underline="false" wrapText="false">
+                  <font>
+                    <Font name="System Regular" size="13"/>
+                  </font>
+                </com.jfoenix.controls.JFXCheckBox>
+                <Data cursor="DEFAULT" enabled="1" id="data-update" tooltipText="Обновление сообщение" visible="1"/>
+                <com.jfoenix.controls.JFXCheckBox alignment="CENTER_LEFT" checkedColor="#0f9d58" contentDisplay="LEFT" ellipsisString="..." focusTraversable="true" graphicTextGap="4" id="img" layoutX="193" layoutY="0" prefHeight="18" prefWidth="80" styleClass="check-box jfx-check-box " text="Картинки" textAlignment="LEFT" unCheckedColor="#5a5a5a" underline="false" wrapText="false">
+                  <font>
+                    <Font name="System Regular" size="13"/>
+                  </font>
+                </com.jfoenix.controls.JFXCheckBox>
+                <Data cursor="DEFAULT" enabled="1" id="data-img" tooltipText="Отоброжение картинок" visible="1"/>
+              </children>
+            </HBox>
             <Data cursor="DEFAULT" enabled="1" id="data-send" visible="1"/>
             <Data cursor="DEFAULT" enabled="1" id="data-hbox6" visible="1"/>
           </children>

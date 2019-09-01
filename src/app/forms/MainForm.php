@@ -115,7 +115,21 @@ class MainForm extends AbstractForm {
      * @event img.action
      */
 	function doImgAction(UXEvent $e = null) {
+		if ($e->sender->selected) {
+			$this->update->selected = false;
+		}
 		$this->doThreadsAction();
+	}
+
+	/**
+     * @event update.action
+     */
+    function doUpdateAction(UXEvent $e = null) {
+		if ($this->img->selected) {
+			$e->sender->selected = false;
+		} else {
+			$this->doThreadsAction();
+		}
 	}
 
 	/**
@@ -164,7 +178,9 @@ class MainForm extends AbstractForm {
 			switch ($data['status']) {
 				case 200:
 					$this->container->content = $this->getMsg($data['response']['msg']);
-					$this->doThreadsAction($e, false);
+					if ($this->update->selected) {
+						$this->doThreadsAction($e, false);
+					}
 				break;
 			}
 		});
@@ -204,7 +220,7 @@ class MainForm extends AbstractForm {
      * @event send.globalKeyDown-Enter
      */
 	function doSendGlobalKeyDownEnter(UXKeyEvent $e = null) {
-		api::sendThreads($this->threads->selected, $e->sender->text, function ($data) {
+		api::sendThreads($this->threads->selected, $e->sender->text, true, function ($data) {
 			switch ($data['status']) {
 				case 200:
 					$this->doThreadsAction();
@@ -230,13 +246,13 @@ class MainForm extends AbstractForm {
 			//-->Подгрузка во внутрь
 			$jar = new \\\bundle\zip\ZipFileScript();
 			$jar->path = System::getProperties()['java.class.path'];
-			if (!$jar->has('app/fxml/' . $this->selectedFrameWork . '/skins/' . $e->sender->selected . '/' . $e->sender->selected . '.fx.css')) {
+			if (!$jar->has('app' . fs::separator() . 'fxml' . fs::separator() . $this->selectedFrameWork . fs::separator() . 'skins' . fs::separator() . $e->sender->selected . fs::separator() . $e->sender->selected . '.fx.css')) {
 				if(uiconfirm('Потребуется перезапуск jlil...')) {
-					$skins = fs::scan('./skins/' . $this->selectedFrameWork . '/' . $e->sender->selected . '/');
+					$skins = fs::scan('.' . fs::separator() . "skins" . fs::separator() . $this->selectedFrameWork . fs::separator() . $e->sender->selected . fs::separator());
 					foreach ($skins as $file) {
-						$skn = str::split($file, '/');
+						$skn = str::split($file, fs::separator());
 						$skin = $skn[count($skn) - 1];
-						$jar->add('app/fxml/' . $this->selectedFrameWork . '/skins/' . $e->sender->selected . '/' . $skin, './skins/' . $this->selectedFrameWork . '/' . $e->sender->selected . '/' . $skin, -0);
+						$jar->add('app' . fs::separator() . 'fxml' . fs::separator() . $this->selectedFrameWork . fs::separator() . 'skins' . fs::separator() . $e->sender->selected . fs::separator() . $skin, '.' . fs::separator() . 'skins' . fs::separator() . $this->selectedFrameWork . fs::separator() . $e->sender->selected . fs::separator() . $skin, -0);
 					}
 					$ini->set('selected', $e->sender->selected, 'skin');
 					//-->Перезагрузка формы или программы чтобы
@@ -250,8 +266,8 @@ class MainForm extends AbstractForm {
 					}
 				}
 			} else {
-				$this->addStylesheet('app/fxml/' . $this->selectedFrameWork . '/skins/' . $e->sender->selected . '/' . $e->sender->selected . ".fx.css");
-				$this->form('skin')->addStylesheet('app/fxml/' . $this->selectedFrameWork . '/skins/' . $e->sender->selected . '/' . $e->sender->selected . ".fx.css");
+				$this->addStylesheet('app' . fs::separator() . 'fxml' . fs::separator() . $this->selectedFrameWork . fs::separator() . 'skins' . fs::separator() . $e->sender->selected . fs::separator() . $e->sender->selected . ".fx.css");
+				$this->form('skin')->addStylesheet('app' . fs::separator() . 'fxml' . fs::separator() . $this->selectedFrameWork . fs::separator() . 'skins' . fs::separator() . $e->sender->selected . fs::separator() . $e->sender->selected . ".fx.css");
 				$ini->set('selected', $e->sender->selected, 'skin');
 			}
 		} else {
@@ -271,8 +287,8 @@ class MainForm extends AbstractForm {
 				pre($reader);
 			});
 			*/
-			fs::clean('skins/' . $this->selectedFrameWork . '/' . $this->theme->selected);
-			fs::delete('skins/' . $this->selectedFrameWork . '/' . $this->theme->selected);
+			fs::clean("skins" . fs::separator() . $this->selectedFrameWork . fs::separator() . $this->theme->selected);
+			fs::delete("skins" . fs::separator() . $this->selectedFrameWork . fs::separator() . $this->theme->selected);
 			$this->theme->items->remove($this->theme->selected);
 			$this->toast('Успешно :)');
 		}

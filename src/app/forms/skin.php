@@ -37,7 +37,7 @@ class skin extends AbstractForm {
 		$bootstrap = new \\\bootstrap();
 		$framework = $bootstrap->getFrameWork();
 		if ($e->sender->text) {
-			$skins = str::split($e->sender->text, '/');
+			$skins = str::split($e->sender->text, fs::separator());
 			$skn = str::split($skins[count($skins) - 1], '.');
 			foreach ($this->getSkins() as $skin) {
 				if ($skin == $skn[0]) {
@@ -50,21 +50,21 @@ class skin extends AbstractForm {
 					UXDialog::showAndWait('Стиль не найден :(', 'ERROR');
 					return;
 				}
-				mkdir('./skins/' . $framework . '/' . $skn[0], 0777);
-				fs::copy($e->sender->text, './skins/' . $framework . '/' . $skn[0] . '/' . $skn[0] . '.fx.css');
+				mkdir('.' . fs::separator() . "skins" . fs::separator() . $framework . fs::separator() . $skn[0], 0777);
+				fs::copy($e->sender->text, '.' . fs::separator() . "skins" . fs::separator() . $framework . fs::separator() . $skn[0] . fs::separator() . $skn[0] . '.fx.css');
 				$this->form('MainForm')->toast("Скин успешно установлен => " . $skn[0]);
 				$this->form('MainForm')->theme->items->add($skn[0]);
 				$this->form('MainForm')->theme->selected = $skn[0];
 				if ($this->list->items->isNotEmpty()) {
 					foreach ($this->list->items->toArray() as $val) {
 						$url	=	$val;
-						$val	=	str::split($val, '/');
-						fs::copy($url, './skins/' . $framework . '/' . $skn[0] . '/' . $val[count($val) - 1]);
+						$val	=	str::split($val, fs::separator());
+						fs::copy($url, '.' . fs::separator() . "skins" . fs::separator() . $framework . fs::separator() . $skn[0] . fs::separator() . $val[count($val) - 1]);
 					}
 				}
 				$this->hide();
 			} catch (Exception $e) {
-				fs::delete('./skins/' . $framework . '/' . $skn[0]);
+				fs::delete('.' . fs::separator() . "skins" . fs::separator() . $framework . fs::separator() . $skn[0]);
 				UXDialog::showAndWait('Стиль не найден :(', 'ERROR');
 			}
 		} else {
@@ -78,6 +78,13 @@ class skin extends AbstractForm {
 	function doHide(UXWindowEvent $e = null) {
 		$this->skin->clear();
 		$this->list->items->clear();
+	}
+
+	/**
+     * @event close.action
+     */
+    function doCloseAction(UXEvent $e = null) {
+		app()->shutdown();
 	}
 
 	/**
@@ -122,9 +129,9 @@ class skin extends AbstractForm {
 		$bootstrap = new \\\bootstrap();
 		$framework = $bootstrap->getFrameWork();
 		$arr = [];
-		$files = fs::scan('./skins/' . $framework . '/', ['excludeFiles' => true]);
+		$files = fs::scan('.' . fs::separator() . "skins" . fs::separator() . $framework . fs::separator(), ['excludeFiles' => true]);
 		foreach ($files as $file) {
-			$skins = str::split($file, '/');
+			$skins = str::split($file, fs::separator());
 			array_push($arr, $skins[count($skins) - 1]);
 		}
 		return $arr;

@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?import javafx.scene.*?><?import javafx.collections.*?><?import javafx.scene.layout.*?><?import javafx.scene.control.*?><?import javafx.scene.text.*?><?import javafx.scene.image.*?><?import javafx.scene.shape.*?><?import javafx.scene.paint.*?><?import javafx.scene.web.*?><?import javafx.geometry.*?><?import java.lang.*?><?import org.develnext.jphp.ext.javafx.classes.data.*?><?import org.develnext.jphp.ext.javafx.support.*?><?import org.develnext.jphp.ext.javafx.support.control.*?><?import org.develnext.jphp.ext.game.support.*?><AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" focusTraversable="false" id="" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480" prefWidth="320" styleClass="">
+<?import javafx.scene.*?><?import javafx.collections.*?><?import javafx.scene.layout.*?><?import javafx.scene.control.*?><?import javafx.scene.text.*?><?import javafx.scene.image.*?><?import javafx.scene.shape.*?><?import javafx.scene.paint.*?><?import javafx.scene.web.*?><?import javafx.geometry.*?><?import java.lang.*?><?import org.develnext.jphp.ext.javafx.classes.data.*?><?import org.develnext.jphp.ext.javafx.support.*?><?import org.develnext.jphp.ext.javafx.support.control.*?><?import org.develnext.jphp.ext.game.support.*?><AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" focusTraversable="false" id="" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480" prefWidth="320" styleClass=" ">
   <children>
     <VBox AnchorPane.bottomAnchor="8" AnchorPane.leftAnchor="8" AnchorPane.rightAnchor="8" AnchorPane.topAnchor="8" alignment="TOP_LEFT" focusTraversable="false" id="vbox3" layoutX="8" layoutY="8" maxHeight="-1" maxWidth="-1" minHeight="-1" minWidth="-1" prefHeight="464" prefWidth="304" spacing="5" styleClass="">
+      <padding>
+        <Insets bottom="5" left="5" right="5" top="5"/>
+      </padding>
       <children>
-        <HBox AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="32" alignment="CENTER_LEFT" focusTraversable="false" id="hbox6" layoutX="0" layoutY="0" maxHeight="-1" maxWidth="-1" minHeight="-1" minWidth="-1" prefHeight="25" prefWidth="304" spacing="5" styleClass="">
+        <HBox AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="32" alignment="CENTER_LEFT" focusTraversable="false" id="hbox6" layoutX="5" layoutY="5" maxHeight="-1" maxWidth="-1" minHeight="-1" minWidth="-1" prefHeight="25" prefWidth="294" spacing="5" styleClass="">
           <children>
             <ComboBox editable="false" focusTraversable="true" id="framework" layoutX="0" layoutY="0" prefHeight="25" prefWidth="999999999" promptText="" styleClass="combo-box-base combo-box " value="awt" visibleRowCount="10">
               <items xmlns:fx="http://javafx.com/fxml">
@@ -16,7 +19,7 @@
             <Data cursor="DEFAULT" enabled="1" id="data-framework" visible="1"/>
           </children>
         </HBox>
-        <HBox AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="32" alignment="CENTER_LEFT" focusTraversable="false" id="hbox3" layoutX="0" layoutY="30" maxHeight="-1" maxWidth="-1" minHeight="-1" minWidth="-1" prefHeight="25" prefWidth="304" spacing="5" styleClass="">
+        <HBox AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="32" alignment="CENTER_LEFT" focusTraversable="false" id="hbox3" layoutX="5" layoutY="35" maxHeight="-1" maxWidth="-1" minHeight="-1" minWidth="-1" prefHeight="25" prefWidth="294" spacing="5" styleClass="">
           <children>
             <ComboBox AnchorPane.leftAnchor="73" AnchorPane.rightAnchor="58" editable="false" focusTraversable="true" id="theme" layoutX="0" layoutY="0" prefHeight="25" prefWidth="9.99999999999999E14" promptText="" styleClass="combo-box-base combo-box " value="Стандартная" visibleRowCount="10">
               <items xmlns:fx="http://javafx.com/fxml">
@@ -25,12 +28,12 @@
                 </FXCollections>
               </items>
             </ComboBox>
-            <Button alignment="CENTER" contentDisplay="LEFT" ellipsisString="..." focusTraversable="true" graphicTextGap="4" id="removeSkin" layoutX="250" layoutY="0" prefHeight="24" prefWidth="18" styleClass="button " text="-" textAlignment="CENTER" underline="false" wrapText="false">
+            <Button alignment="CENTER" contentDisplay="LEFT" ellipsisString="..." focusTraversable="true" graphicTextGap="4" id="removeSkin" layoutX="240" layoutY="0" prefHeight="24" prefWidth="18" styleClass="button " text="-" textAlignment="CENTER" textFill="#000000" underline="false" wrapText="false">
               <font>
                 <Font name="System Regular" size="13"/>
               </font>
             </Button>
-            <Button AnchorPane.rightAnchor="68" alignment="CENTER" contentDisplay="LEFT" ellipsisString="..." focusTraversable="true" graphicTextGap="4" id="newSkin" layoutX="278" layoutY="0" prefHeight="24" prefWidth="24" styleClass="button " text="+" textAlignment="CENTER" underline="false" wrapText="false">
+            <Button AnchorPane.rightAnchor="68" alignment="CENTER" contentDisplay="LEFT" ellipsisString="..." focusTraversable="true" graphicTextGap="4" id="newSkin" layoutX="268" layoutY="0" prefHeight="24" prefWidth="24" styleClass="button " text="+" textAlignment="CENTER" textFill="#000000" underline="false" wrapText="false">
               <font>
                 <Font name="System Regular" size="13"/>
               </font>
@@ -41,14 +44,14 @@
           </children>
         </HBox>
         <Data cursor="DEFAULT" enabled="1" id="data-hbox3" visible="1"/>
-        <HBox AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="32" alignment="CENTER_LEFT" focusTraversable="false" id="hbox4" layoutX="0" layoutY="60" maxHeight="-1" maxWidth="-1" minHeight="-1" minWidth="-1" prefHeight="25" prefWidth="304" spacing="5" styleClass="">
+        <HBox AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="32" alignment="CENTER_LEFT" focusTraversable="false" id="hbox4" layoutX="5" layoutY="65" maxHeight="-1" maxWidth="-1" minHeight="-1" minWidth="-1" prefHeight="25" prefWidth="294" spacing="5" styleClass="">
           <children>
             <ComboBox AnchorPane.leftAnchor="176" AnchorPane.rightAnchor="33" editable="false" focusTraversable="true" id="dot" layoutX="0" layoutY="0" prefHeight="25" prefWidth="9.999999999E9" promptText="" styleClass="combo-box-base combo-box " value="" visibleRowCount="10">
               <items xmlns:fx="http://javafx.com/fxml">
                 <FXCollections fx:factory="observableArrayList"/>
               </items>
             </ComboBox>
-            <Button AnchorPane.rightAnchor="68" alignment="CENTER" contentDisplay="LEFT" ellipsisString="..." focusTraversable="true" graphicTextGap="4" id="copyDot" layoutX="276" layoutY="0" prefHeight="24" prefWidth="24" styleClass="button " text="C" textAlignment="CENTER" underline="false" wrapText="false">
+            <Button AnchorPane.rightAnchor="68" alignment="CENTER" contentDisplay="LEFT" ellipsisString="..." focusTraversable="true" graphicTextGap="4" id="copyDot" layoutX="266" layoutY="0" prefHeight="24" prefWidth="24" styleClass="button " text="C" textAlignment="CENTER" textFill="#000000" underline="false" wrapText="false">
               <font>
                 <Font name="System Regular" size="13"/>
               </font>
@@ -58,14 +61,14 @@
           </children>
         </HBox>
         <Data cursor="DEFAULT" enabled="1" id="data-hbox4" visible="1"/>
-        <HBox AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="32" alignment="CENTER_LEFT" focusTraversable="false" id="hbox" layoutX="0" layoutY="90" maxHeight="-1" maxWidth="-1" minHeight="-1" minWidth="-1" prefHeight="25" prefWidth="304" spacing="5" styleClass="">
+        <HBox AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="32" alignment="CENTER_LEFT" focusTraversable="false" id="hbox" layoutX="5" layoutY="95" maxHeight="-1" maxWidth="-1" minHeight="-1" minWidth="-1" prefHeight="25" prefWidth="294" spacing="5" styleClass="">
           <children>
             <ComboBox AnchorPane.leftAnchor="176" AnchorPane.rightAnchor="33" editable="false" focusTraversable="true" id="space" layoutX="0" layoutY="0" prefHeight="25" prefWidth="9.999999999E9" promptText="" styleClass="combo-box-base combo-box " value="" visibleRowCount="10">
               <items xmlns:fx="http://javafx.com/fxml">
                 <FXCollections fx:factory="observableArrayList"/>
               </items>
             </ComboBox>
-            <Button AnchorPane.rightAnchor="68" alignment="CENTER" contentDisplay="LEFT" ellipsisString="..." focusTraversable="true" graphicTextGap="4" id="copySpace" layoutX="276" layoutY="0" prefHeight="24" prefWidth="24" styleClass="button " text="C" textAlignment="CENTER" underline="false" wrapText="false">
+            <Button AnchorPane.rightAnchor="68" alignment="CENTER" contentDisplay="LEFT" ellipsisString="..." focusTraversable="true" graphicTextGap="4" id="copySpace" layoutX="266" layoutY="0" prefHeight="24" prefWidth="24" styleClass="button " text="C" textAlignment="CENTER" textFill="#000000" underline="false" wrapText="false">
               <font>
                 <Font name="System Regular" size="13"/>
               </font>
@@ -75,14 +78,14 @@
           </children>
         </HBox>
         <Data cursor="DEFAULT" enabled="1" id="data-hbox" visible="1"/>
-        <HBox AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="32" alignment="CENTER_LEFT" focusTraversable="false" id="hboxAlt" layoutX="0" layoutY="120" maxHeight="-1" maxWidth="-1" minHeight="-1" minWidth="-1" prefHeight="25" prefWidth="304" spacing="5" styleClass="">
+        <HBox AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="32" alignment="CENTER_LEFT" focusTraversable="false" id="hboxAlt" layoutX="5" layoutY="125" maxHeight="-1" maxWidth="-1" minHeight="-1" minWidth="-1" prefHeight="25" prefWidth="294" spacing="5" styleClass="">
           <children>
             <ComboBox AnchorPane.leftAnchor="176" AnchorPane.rightAnchor="33" editable="false" focusTraversable="true" id="threads" layoutX="0" layoutY="0" prefHeight="25" prefWidth="9.999999999E9" promptText="" styleClass="combo-box-base combo-box " value="" visibleRowCount="10">
               <items xmlns:fx="http://javafx.com/fxml">
                 <FXCollections fx:factory="observableArrayList"/>
               </items>
             </ComboBox>
-            <Button AnchorPane.rightAnchor="68" alignment="CENTER" contentDisplay="LEFT" ellipsisString="..." focusTraversable="true" graphicTextGap="4" id="copythreads" layoutX="276" layoutY="0" prefHeight="25" prefWidth="28" styleClass="button " text="C" textAlignment="CENTER" underline="false" wrapText="false">
+            <Button AnchorPane.rightAnchor="68" alignment="CENTER" contentDisplay="LEFT" ellipsisString="..." focusTraversable="true" graphicTextGap="4" id="copythreads" layoutX="266" layoutY="0" prefHeight="25" prefWidth="28" styleClass="button " text="C" textAlignment="CENTER" textFill="#000000" underline="false" wrapText="false">
               <font>
                 <Font name="System Regular" size="13"/>
               </font>
@@ -92,22 +95,12 @@
           </children>
         </HBox>
         <Data cursor="DEFAULT" enabled="1" id="data-hboxAlt" visible="1"/>
-        <HBox AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="32" alignment="CENTER_RIGHT" focusTraversable="false" id="hbox5" layoutX="0" layoutY="150" maxHeight="-1" maxWidth="-1" minHeight="-1" minWidth="-1" prefHeight="25" prefWidth="304" spacing="5" styleClass="">
-          <children>
-            <ToggleButton alignment="CENTER" contentDisplay="LEFT" ellipsisString="..." focusTraversable="true" graphicTextGap="4" id="img" layoutX="280" layoutY="0" prefHeight="25" prefWidth="24" styleClass="toggle-button " text="I" textAlignment="LEFT" underline="false" wrapText="false">
-              <font>
-                <Font name="System Regular" size="13"/>
-              </font>
-            </ToggleButton>
-            <Data cursor="DEFAULT" enabled="1" id="data-img" tooltipText="Отоброжение картинок" visible="1"/>
-          </children>
-        </HBox>
         <Data cursor="DEFAULT" enabled="1" id="data-hbox5" visible="1"/>
-        <ScrollPane AnchorPane.bottomAnchor="48" AnchorPane.leftAnchor="8" AnchorPane.rightAnchor="8" AnchorPane.topAnchor="168" fitToHeight="true" fitToWidth="true" focusTraversable="false" hbarPolicy="AS_NEEDED" hvalue="0" id="container" layoutX="0" layoutY="180" prefHeight="99999999" prefWidth="999999999" styleClass="scroll-pane " vbarPolicy="AS_NEEDED" vvalue="0">
+        <ScrollPane AnchorPane.bottomAnchor="48" AnchorPane.leftAnchor="8" AnchorPane.rightAnchor="8" AnchorPane.topAnchor="168" fitToHeight="true" fitToWidth="true" focusTraversable="false" hbarPolicy="AS_NEEDED" hvalue="0" id="container" layoutX="5" layoutY="155" prefHeight="99999999" prefWidth="999999999" styleClass="scroll-pane " vbarPolicy="AS_NEEDED" vvalue="0">
           <content>
-            <AnchorPane focusTraversable="false" id="" maxHeight="-1" maxWidth="-1" minHeight="-1" minWidth="-1" prefHeight="254" prefWidth="304" styleClass="">
+            <AnchorPane focusTraversable="false" id="" maxHeight="-1" maxWidth="-1" minHeight="-1" minWidth="-1" prefHeight="244" prefWidth="294" styleClass="">
               <children>
-                <VBox AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" alignment="TOP_LEFT" focusTraversable="false" id="vbox" layoutX="0" layoutY="0" maxHeight="-1" maxWidth="-1" minHeight="-1" minWidth="-1" prefHeight="254" prefWidth="304" spacing="5" styleClass="">
+                <VBox AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" alignment="TOP_LEFT" focusTraversable="false" id="vbox" layoutX="0" layoutY="0" maxHeight="-1" maxWidth="-1" minHeight="-1" minWidth="-1" prefHeight="244" prefWidth="294" spacing="5" styleClass="">
                   <padding>
                     <Insets bottom="15" left="15" right="15" top="15"/>
                   </padding>
@@ -118,11 +111,27 @@
             </AnchorPane>
           </content>
         </ScrollPane>
-        <TextField AnchorPane.bottomAnchor="29" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" alignment="CENTER_LEFT" editable="true" focusTraversable="true" id="send" layoutX="0" layoutY="439" prefColumnCount="12" prefHeight="32" prefWidth="512" promptText="Сообщение..." styleClass="text-input text-field " text="">
+        <TextField AnchorPane.bottomAnchor="29" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" alignment="CENTER_LEFT" editable="true" focusTraversable="true" id="send" layoutX="5" layoutY="404" prefColumnCount="12" prefHeight="32" prefWidth="512" promptText="Сообщение..." styleClass="text-input text-field " text="">
           <font>
             <Font name="System Regular" size="13"/>
           </font>
         </TextField>
+        <HBox AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="32" alignment="CENTER_RIGHT" focusTraversable="false" id="hbox5" layoutX="5" layoutY="434" maxHeight="-1" maxWidth="-1" minHeight="-1" minWidth="-1" prefHeight="25" prefWidth="294" spacing="5" styleClass="">
+          <children>
+            <ToggleButton alignment="CENTER" contentDisplay="LEFT" ellipsisString="..." focusTraversable="true" graphicTextGap="4" id="update" layoutX="234" layoutY="0" prefHeight="25" prefWidth="24" styleClass="toggle-button " text="О" textAlignment="LEFT" textFill="#000000" underline="false" wrapText="false">
+              <font>
+                <Font name="System Regular" size="13"/>
+              </font>
+            </ToggleButton>
+            <Data cursor="DEFAULT" enabled="1" id="data-update" tooltipText="Обновление сообщение" visible="1"/>
+            <ToggleButton alignment="CENTER" contentDisplay="LEFT" ellipsisString="..." focusTraversable="true" graphicTextGap="4" id="img" layoutX="268" layoutY="0" prefHeight="25" prefWidth="24" styleClass="toggle-button " text="К" textAlignment="LEFT" textFill="#000000" underline="false" wrapText="false">
+              <font>
+                <Font name="System Regular" size="13"/>
+              </font>
+            </ToggleButton>
+            <Data cursor="DEFAULT" enabled="1" id="data-img" tooltipText="Отоброжение картинок" visible="1"/>
+          </children>
+        </HBox>
         <Data cursor="DEFAULT" enabled="1" id="data-container" visible="1"/>
         <Data cursor="DEFAULT" enabled="1" id="data-send" visible="1"/>
         <Data cursor="DEFAULT" enabled="1" id="data-hbox6" visible="1"/>
