@@ -3,6 +3,7 @@ namespace app\forms;
 
 use std, gui, framework;
 use action\Element;
+use php\format\JsonProcessor;
 use app\modules\capi as api;
 
 class MainForm extends AbstractForm {
@@ -11,11 +12,16 @@ class MainForm extends AbstractForm {
 	public $changedFramework;
 
 	public function construct() {
+		$ini = new IniStorage();
+		$ini->path = 'config.ini';
+		$skin = $ini->get('selected', 'skin');
 		$bootstrap	=	new \\\bootstrap();
 		$Name		=	$this->getName();
 		$framework	=	$bootstrap->getFrameWork();
 		$this->selectedFrameWork = $framework;
 		Logger::info("[Фреймворк] [$Name] Загружен - $framework =)");
+		Logger::info("[Скин] [$Name] Загружен - $skin =)");
+		app()->addStyle('.theme' . '/' . $framework . '/' . $skin . '/' . $skin . ".fx.css");
 		return "res://app/fxml/$framework/" . $this->getName();
 	}
 
@@ -237,44 +243,65 @@ class MainForm extends AbstractForm {
      * @event theme.action
      */
     function doThemeAction(UXEvent $e = null) {
-		$this->clearStylesheets();
-		$this->form('skin')->clearStylesheets();
+		$ini		=	new IniStorage();
+		$ini->path	=	'config.ini';
+		$skin		=	$ini->get('selected', 'skin');
 		if ($e->sender->selectedIndex > 0) {
-			$ini = new IniStorage();
-			$ini->path = 'config.ini';
 			$this->removeSkin->enabled = true;
 			//-->Подгрузка во внутрь
 			$jar = new \\\bundle\zip\ZipFileScript();
 			$jar->path = System::getProperties()['java.class.path'];
-			if (!$jar->has('app' . fs::separator() . 'fxml' . fs::separator() . $this->selectedFrameWork . fs::separator() . 'skins' . fs::separator() . $e->sender->selected . fs::separator() . $e->sender->selected . '.fx.css')) {
+			if (!$jar->has('.theme' . '/' . $this->selectedFrameWork . '/' . $e->sender->selected . '/' . $e->sender->selected . '.fx.css')) {
 				if(uiconfirm('Потребуется перезапуск jlil...')) {
-					$skins = fs::scan('.' . fs::separator() . "skins" . fs::separator() . $this->selectedFrameWork . fs::separator() . $e->sender->selected . fs::separator());
-					foreach ($skins as $file) {
-						$skn = str::split($file, fs::separator());
-						$skin = $skn[count($skn) - 1];
-						$jar->add('app' . fs::separator() . 'fxml' . fs::separator() . $this->selectedFrameWork . fs::separator() . 'skins' . fs::separator() . $e->sender->selected . fs::separator() . $skin, '.' . fs::separator() . 'skins' . fs::separator() . $this->selectedFrameWork . fs::separator() . $e->sender->selected . fs::separator() . $skin, -0);
-					}
-					$ini->set('selected', $e->sender->selected, 'skin');
 					//-->Перезагрузка формы или программы чтобы
-					execute('java -jar ' . $jar->path);
+					execute('java -jar mips.jar -скин=' . $jar->path . '=' . $this->selectedFrameWork . '=' . $e->sender->selected);
 					app()->shutdown();
 				} else {
-					if ($ini->get('selected', 'skin')) {
-						$e->sender->selected = $ini->get('selected', 'skin');
+					if ($skin) {
+						$e->sender->selected = $skin;
 					} else {
 						$e->sender->selectedIndex = 0;
 					}
 				}
 			} else {
-				$this->addStylesheet('app' . fs::separator() . 'fxml' . fs::separator() . $this->selectedFrameWork . fs::separator() . 'skins' . fs::separator() . $e->sender->selected . fs::separator() . $e->sender->selected . ".fx.css");
-				$this->form('skin')->addStylesheet('app' . fs::separator() . 'fxml' . fs::separator() . $this->selectedFrameWork . fs::separator() . 'skins' . fs::separator() . $e->sender->selected . fs::separator() . $e->sender->selected . ".fx.css");
-				$ini->set('selected', $e->sender->selected, 'skin');
+				$this->ApplySkin();
 			}
 		} else {
+			$this->ApplySkin();
 			$this->removeSkin->enabled = false;
 		}
     }
 
+	/**
+	 * Принять скин
+	 */
+	function ApplySkin () {
+		$ini		=	new IniStorage();
+		$ini->path	=	'config.ini';
+		$skin		=	$ini->get('selected', 'skin');
+		if ($skin != $this->theme->selected && $this->theme->selectedIndex > 0) {
+			Logger::info("[Скин] выбран => $skin");
+			app()->removeStyle('.theme' . '/' . $this->selectedFrameWork . '/' . $skin . '/' . $skin . '.fx.css');
+			$ini->set('selected', $this->theme->selected, 'skin');
+			//-->Перезапуск формы
+			$this->free();
+			app()->showForm($this->getName());
+			app()->getForm(skin)->free();
+		} elseif($this->theme->selectedIndex <= 0) {
+			$ini->set('selected', $this->theme->selected, 'skin');
+			Logger::info("[Скин] выбран => $skin");
+			app()->getForm($this->getName())->clearStylesheets();
+			app()->getForm(skin)->clearStylesheets();
+		}
+	}
+
+	/**
+     * @event hide 
+     */
+	function doHide(UXWindowEvent $e = null){
+		//app()->shutdown();
+	}
+	
 	/**
      * @event removeSkin.action
      */

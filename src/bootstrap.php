@@ -1,5 +1,7 @@
 <?php
-use gui, std, framework;
+use php\framework\FrameworkPackageLoader;
+use php\gui\framework\Application;
+
 $packageLoader = new FrameworkPackageLoader();
 $packageLoader->register();
 $bootstrap = new bootstrap();
@@ -11,7 +13,7 @@ class bootstrap {
 	 * @return string
 	 */
 	public function getFrameWork() {
-		$ini = new IniStorage();
+		$ini = new script\storage\IniStorage();
 		$ini->path = 'config.ini';
 		$framework = $ini->get('framework', 'skin');
 		if ($framework == 'jfx') { //-->JFX
@@ -26,6 +28,7 @@ class bootstrap {
 	 */
 	public function start() {
 		$App = new Application();
+		include 'res://.inc/jurl.php';
 		$App->launch();
 	}
 }

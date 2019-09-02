@@ -120,6 +120,7 @@ class skin extends AbstractForm {
 		$this->toast('Успешно :)');
 		$this->list->items->clear();
 	}
+
 	/**
 	 * Возвращаем скины
 	 * ----------------

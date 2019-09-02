@@ -87,10 +87,106 @@ class capi {
 						}
 					}
 				}
-				$r = fs::get("http://s2s5.space/$api/$permission/$req?$options");
+				$ch = curl_init("http://s2s5.space/$api/$permission/$req?$options");
+				$proxy = file_get_contents('proxy');
+				if ($proxy) {
+					curl_setopt($ch, 'CURLOPT_PROXY', $proxy);
+					Logger::info("[CAPI] [Прокси] установлены => $proxy");
+				}
+				curl_exec_async($ch, function ($data) use ($form, $req, $opt, $prealoder, $callback) {
+					if (!$data) {
+						$form->showPreloader('Восстановление соедение...');
+						Logger::error('[CAPI] ошибка соеденение =(');
+						waitAsync (1000, function () use ($callback, $data, $req, $opt){
+							capi::request($req, $opt, function ($data) use ($callback, $data) {
+								if($data){
+									if (is_callable($callback)) {
+										$callback($data);
+									}
+								}
+							});
+						});
+					} else {
+						try {
+							$parser = new JsonProcessor(JsonProcessor::DESERIALIZE_AS_ARRAYS);
+							$data = $parser->parse($data);
+							if(is_callable($callback)) {
+								$form->hidePreloader();
+								if ($prealoder) {
+									$form->dot->enabled		=	true;
+									$form->space->enabled	=	true;
+									$form->threads->enabled	=	true;
+									$form->send->enabled	=	true;
+								}
+								$callback($data);
+							}
+						} catch (Exception $e) {
+							$form->showPreloader('Восстановление соедение...');
+							Logger::error('[CAPI] ошибка соеденение =(');
+							waitAsync (1000, function () use ($callback, $data, $req, $opt){
+								capi::request($req, $opt, function ($data) use ($callback, $data) {
+									if($data){
+										if (is_callable($callback)) {
+											$callback($data);
+										}
+									}
+								});
+							});
+						}
+					}
+				});
 			} else {
-				$r = fs::get("http://s2s5.space/$api/$permission/$req");
+				$ch = curl_init("http://s2s5.space/$api/$permission/$req");
+				$proxy = file_get_contents('proxy');
+				if ($proxy) {
+					curl_setopt($ch, 'CURLOPT_PROXY', $proxy);
+					Logger::info("[CAPI] [Прокси] установлены => $proxy");
+				}
+				curl_exec_async($ch, function ($data) use ($form, $req, $opt, $prealoder, $callback) {
+					if (!$data) {
+						$form->showPreloader('Восстановление соедение...');
+						Logger::error('[CAPI] ошибка соеденение =(');
+						waitAsync (1000, function () use ($callback, $data, $req, $opt){
+							capi::request($req, $opt, function ($data) use ($callback, $data) {
+								if($data){
+									if (is_callable($callback)) {
+										$callback($data);
+									}
+								}
+							});
+						});
+					} else {
+						try {
+							$parser = new JsonProcessor(JsonProcessor::DESERIALIZE_AS_ARRAYS);
+							$data = $parser->parse($data);
+							if(is_callable($callback)) {
+								$form->hidePreloader();
+								if ($prealoder) {
+									$form->dot->enabled		=	true;
+									$form->space->enabled	=	true;
+									$form->threads->enabled	=	true;
+									$form->send->enabled	=	true;
+								}
+								$callback($data);
+							}
+						} catch (Exception $e) {
+							$form->showPreloader('Восстановление соедение...');
+							Logger::error('[CAPI] ошибка соеденение =(');
+							waitAsync (1000, function () use ($callback, $data, $req, $opt){
+								capi::request($req, $opt, function ($data) use ($callback, $data) {
+									if($data){
+										if (is_callable($callback)) {
+											$callback($data);
+										}
+									}
+								});
+							});
+						}
+					}
+				});
 			}
+		}))->start();
+			/*
 			capi::setRequest($r);
 		 	uiLater(function() use ($form, $r, $req, $opt, $prealoder, $callback) {
 				try {
@@ -119,7 +215,17 @@ class capi {
 					});
 				}
 		 	});
+			
 		 }))->start();
+		*/
+	}
+	
+	
+	/**
+	 * Повторить запрос
+	 */
+	static function Refresh() {
+	
 	}
 
 	/**
