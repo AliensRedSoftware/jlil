@@ -65,16 +65,26 @@ class capi {
 	 */
 	static function request ($req = 'getDot', $opt = [], $prealoder = true, $callback = null) {
 		$form = app()->getForm(MainForm);
+		$badproxymax = 5;
 		if ($prealoder) {
-			$form->dot->enabled		=	false;
-			$form->space->enabled	=	false;
-			$form->threads->enabled	=	false;
-			$form->send->enabled	=	false;
-			$form->showPreloader('Возвращение...');
+			$form->showLoading('Возвращение...');
 		}
 		$api		=	capi::getApi();
 		$permission	=	capi::getPermission();
-		(new Thread(function() use ($form, $api, $permission, $req, $opt, $prealoder, $callback) { //Создание потока основного и его запуск
+		$ch = curl_init();
+		//-->Установка загаловок
+		$header = str::split(file_get_contents('header.conf'), "\n");
+		if ($header) {
+			curl_setopt($ch, 'CURLOPT_HTTPHEADER', $header);
+		}
+		//-->Установка прокси
+		$proxy = str::split(file_get_contents('proxy'), "\n")[0];
+		if ($proxy) {
+			curl_setopt($ch, 'CURLOPT_PROXYTYPE', 'CURLPROXY_SOCKS5');
+			curl_setopt($ch, 'CURLOPT_PROXY', $proxy);
+			Logger::info("[CAPI] [Прокси] установлены => $proxy");
+		}
+		(new Thread(function() use ($ch, $proxy, $form, $badproxymax, $api, $permission, $req, $opt, $prealoder, $callback) { //Создание потока основного и его запуск
 			if ($opt) {
 				unset($options);
 				foreach ($opt as $func => $val) {
@@ -87,15 +97,28 @@ class capi {
 						}
 					}
 				}
-				$ch = curl_init("http://s2s5.space/$api/$permission/$req?$options");
-				$proxy = file_get_contents('proxy');
-				if ($proxy) {
-					curl_setopt($ch, 'CURLOPT_PROXY', $proxy);
-					Logger::info("[CAPI] [Прокси] установлены => $proxy");
-				}
-				curl_exec_async($ch, function ($data) use ($form, $req, $opt, $prealoder, $callback) {
+				curl_setopt($ch, 'CURLOPT_URL', "http://s2s5.space/$api/$permission/$req?$options");
+				curl_exec_async($ch, function ($data) use ($badproxymax, $proxy, $form, $req, $opt, $prealoder, $callback) {
 					if (!$data) {
-						$form->showPreloader('Восстановление соедение...');
+						//-->Проверка на проксю
+						if ($proxy) {
+							$GLOBALS['badproxy']++;
+							$badproxy = $GLOBALS['badproxy'];
+							Logger::info("[CAPI] [Прокси] [$badproxy из $badproxymax] не удача подключение => $proxy");
+							if($GLOBALS['badproxy'] == $badproxymax) {
+								$listproxy = '';
+								$count = count(str::split(file_get_contents('proxy'), "\n"));
+								$lines = str::split(file_get_contents('proxy'), "\n");
+								foreach ($lines as $prx) {
+									if ($proxy != $prx) {
+										$listproxy .= "$prx\n";
+									}
+								}
+								Stream::putContents('proxy', trim(ltrim($listproxy)));
+								$GLOBALS['badproxy'] = 0;
+							}
+						}
+						$form->showLoading('Восстановление соедение...');
 						Logger::error('[CAPI] ошибка соеденение =(');
 						waitAsync (1000, function () use ($callback, $data, $req, $opt){
 							capi::request($req, $opt, function ($data) use ($callback, $data) {
@@ -111,17 +134,30 @@ class capi {
 							$parser = new JsonProcessor(JsonProcessor::DESERIALIZE_AS_ARRAYS);
 							$data = $parser->parse($data);
 							if(is_callable($callback)) {
-								$form->hidePreloader();
-								if ($prealoder) {
-									$form->dot->enabled		=	true;
-									$form->space->enabled	=	true;
-									$form->threads->enabled	=	true;
-									$form->send->enabled	=	true;
-								}
+								$GLOBALS['badproxy'] = 0;
+								$form->hideLoading();
 								$callback($data);
 							}
 						} catch (Exception $e) {
-							$form->showPreloader('Восстановление соедение...');
+							//-->Проверка на проксю
+							if ($proxy) {
+								$GLOBALS['badproxy']++;
+								$badproxy = $GLOBALS['badproxy'];
+								Logger::info("[CAPI] [Прокси] [$badproxy из $badproxymax] не удача подключение => $proxy");
+								if($GLOBALS['badproxy'] == $badproxymax) {
+									$listproxy = '';
+									$count = count(str::split(file_get_contents('proxy'), "\n"));
+									$lines = str::split(file_get_contents('proxy'), "\n");
+									foreach ($lines as $prx) {
+										if ($proxy != $prx) {
+											$listproxy .= "$prx\n";
+										}
+									}
+									Stream::putContents('proxy', trim(ltrim($listproxy)));
+									$GLOBALS['badproxy'] = 0;
+								}
+							}
+							$form->showLoading('Восстановление соедение...');
 							Logger::error('[CAPI] ошибка соеденение =(');
 							waitAsync (1000, function () use ($callback, $data, $req, $opt){
 								capi::request($req, $opt, function ($data) use ($callback, $data) {
@@ -136,15 +172,28 @@ class capi {
 					}
 				});
 			} else {
-				$ch = curl_init("http://s2s5.space/$api/$permission/$req");
-				$proxy = file_get_contents('proxy');
-				if ($proxy) {
-					curl_setopt($ch, 'CURLOPT_PROXY', $proxy);
-					Logger::info("[CAPI] [Прокси] установлены => $proxy");
-				}
-				curl_exec_async($ch, function ($data) use ($form, $req, $opt, $prealoder, $callback) {
+				curl_setopt($ch, 'CURLOPT_URL', "http://s2s5.space/$api/$permission/$req");
+				curl_exec_async($ch, function ($data) use ($badproxymax, $proxy, $form, $req, $opt, $prealoder, $callback) {
 					if (!$data) {
-						$form->showPreloader('Восстановление соедение...');
+						//-->Проверка на проксю
+						if ($proxy) {
+							$GLOBALS['badproxy']++;
+							$badproxy = $GLOBALS['badproxy'];
+							Logger::info("[CAPI] [Прокси] [$badproxy из $badproxymax] не удача подключение => $proxy");
+							if($GLOBALS['badproxy'] == $badproxymax) {
+								$listproxy = '';
+								$count = count(str::split(file_get_contents('proxy'), "\n"));
+								$lines = str::split(file_get_contents('proxy'), "\n");
+								foreach ($lines as $prx) {
+									if ($proxy != $prx) {
+										$listproxy .= "$prx\n";
+									}
+								}
+								Stream::putContents('proxy', trim(ltrim($listproxy)));
+								$GLOBALS['badproxy'] = 0;
+							}
+						}
+						$form->showLoading('Восстановление соедение...');
 						Logger::error('[CAPI] ошибка соеденение =(');
 						waitAsync (1000, function () use ($callback, $data, $req, $opt){
 							capi::request($req, $opt, function ($data) use ($callback, $data) {
@@ -160,17 +209,30 @@ class capi {
 							$parser = new JsonProcessor(JsonProcessor::DESERIALIZE_AS_ARRAYS);
 							$data = $parser->parse($data);
 							if(is_callable($callback)) {
-								$form->hidePreloader();
-								if ($prealoder) {
-									$form->dot->enabled		=	true;
-									$form->space->enabled	=	true;
-									$form->threads->enabled	=	true;
-									$form->send->enabled	=	true;
-								}
+								$GLOBALS['badproxy'] = 0;
+								$form->hideLoading();
 								$callback($data);
 							}
 						} catch (Exception $e) {
-							$form->showPreloader('Восстановление соедение...');
+							//-->Проверка на проксю
+							if ($proxy) {
+								$GLOBALS['badproxy']++;
+								$badproxy = $GLOBALS['badproxy'];
+								Logger::info("[CAPI] [Прокси] [$badproxy из $badproxymax] не удача подключение => $proxy");
+								if($GLOBALS['badproxy'] == $badproxymax) {
+									$listproxy = '';
+									$count = count(str::split(file_get_contents('proxy'), "\n"));
+									$lines = str::split(file_get_contents('proxy'), "\n");
+									foreach ($lines as $prx) {
+										if ($proxy != $prx) {
+											$listproxy .= "$prx\n";
+										}
+									}
+									Stream::putContents('proxy', trim(ltrim($listproxy)));
+									$GLOBALS['badproxy'] = 0;
+								}
+							}
+							$form->showLoading('Восстановление соедение...');
 							Logger::error('[CAPI] ошибка соеденение =(');
 							waitAsync (1000, function () use ($callback, $data, $req, $opt){
 								capi::request($req, $opt, function ($data) use ($callback, $data) {
@@ -186,46 +248,14 @@ class capi {
 				});
 			}
 		}))->start();
-			/*
-			capi::setRequest($r);
-		 	uiLater(function() use ($form, $r, $req, $opt, $prealoder, $callback) {
-				try {
-					$parser = new JsonProcessor(JsonProcessor::DESERIALIZE_AS_ARRAYS);
-					$r = $parser->parse($r);
-					if(is_callable($callback)) {
-						$form->hidePreloader();
-						if ($prealoder) {
-							$form->dot->enabled		=	true;
-							$form->space->enabled	=	true;
-							$form->threads->enabled	=	true;
-							$form->send->enabled	=	true;
-						}
-						$callback($r);
-					}
-				} catch (Exception $e) {
-					$form->showPreloader('Восстановление соедение...');
-					waitAsync (1000, function () use ($callback, $r, $req, $opt){
-						capi::request($req, $opt, function ($data) use ($callback, $r){
-							if($data){
-								if (is_callable($callback)) {
-									$callback($data);
-								}
-							}
-						});
-					});
-				}
-		 	});
-			
-		 }))->start();
-		*/
 	}
-	
-	
+
+
 	/**
 	 * Повторить запрос
 	 */
 	static function Refresh() {
-	
+
 	}
 
 	/**

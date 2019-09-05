@@ -64,6 +64,10 @@ class MainForm extends AbstractForm {
 				$e->sender->style = 'TRANSPARENT';
 				$e->sender->layout->backgroundColor = UXColor::of('#00000000');
 				$e->sender->transparent = true;
+				//-->Форма перемещение эффект
+				$draggingForm = new DraggingFormBehaviour();
+        		$draggingForm->opacityEnabled = true;
+        		$draggingForm->apply($this->panel);
 			break;
 			default:
 			break;
@@ -71,9 +75,17 @@ class MainForm extends AbstractForm {
 	}
 
 	/**
+	 * @event close.action
+	 */
+	function doCloseAction(UXWindowEvent $e = null) {
+		app()->shutdown();
+	}
+
+	/**
      * @event show
      */
 	function doShow(UXWindowEvent $e = null) {
+		$e->sender->title	=	'jlil-1.1.0';
 		$this->vbox->style	=	'-fx-border-color:#333333;';
 		//-->API...
 		api::setApi('capi');
@@ -135,6 +147,43 @@ class MainForm extends AbstractForm {
 			$e->sender->selected = false;
 		} else {
 			$this->doThreadsAction();
+		}
+	}
+
+	/**
+	 * Показать загрузка формы
+	 */
+	function showLoading ($text = 'Загрузка...') {
+		$this->dot->enabled		=	false;
+		$this->space->enabled	=	false;
+		$this->threads->enabled	=	false;
+		$this->send->enabled	=	false;
+		switch ($this->selectedFrameWork) {
+			case 'jfx':
+				$this->progressText->text = $text;
+				$this->prealoder->toFront();
+			break;
+			default:
+				$this->showPreloader($text);
+			break;
+		}
+	}
+
+	/**
+	 * Скрыть загрузка формы
+	 */
+	function hideLoading () {
+		$this->dot->enabled		=	true;
+		$this->space->enabled	=	true;
+		$this->threads->enabled	=	true;
+		$this->send->enabled	=	true;
+		switch ($this->selectedFrameWork) {
+			case 'jfx':
+				$this->prealoder->toBack();
+			break;
+			default:
+				$this->hidePreloader();
+			break;
 		}
 	}
 
@@ -205,20 +254,24 @@ class MainForm extends AbstractForm {
      * @event theme.construct
      */
 	function doThemeConstruct(UXEvent $e = null) {
-		$ini = new IniStorage();
-		$ini->path = 'config.ini';
-		$selected = $ini->get('selected', 'skin');
-		foreach ($this->form('skin')->getSkins() as $skin) {
-			$e->sender->items->add($skin);
-			if ($selected == $skin) {
-				$e->sender->selected = $selected;
+		if (!fs::isFile('mips.jar')) {
+			$this->hbox3->free();
+		} else {
+			$ini = new IniStorage();
+			$ini->path = 'config.ini';
+			$selected = $ini->get('selected', 'skin');
+			foreach ($this->form('skin')->getSkins() as $skin) {
+				$e->sender->items->add($skin);
+				if ($selected == $skin) {
+					$e->sender->selected = $selected;
+				}
 			}
-		}
-		if (!$e->sender->selected) {
-			$e->sender->selectedIndex = 0;
-		}
-		if ($e->sender->selectedIndex == 0) {
-			$this->removeSkin->enabled = false;
+			if (!$e->sender->selected) {
+				$e->sender->selectedIndex = 0;
+			}
+			if ($e->sender->selectedIndex == 0) {
+				$this->removeSkin->enabled = false;
+			}
 		}
 	}
 
@@ -295,13 +348,6 @@ class MainForm extends AbstractForm {
 		}
 	}
 
-	/**
-     * @event hide 
-     */
-	function doHide(UXWindowEvent $e = null){
-		//app()->shutdown();
-	}
-	
 	/**
      * @event removeSkin.action
      */
