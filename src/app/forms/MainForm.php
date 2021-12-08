@@ -8,7 +8,7 @@ use app\modules\capi as api;
 
 class MainForm extends AbstractForm {
 
-	public $selectedFrameWork;
+	public $framework;
 	public $changedFramework;
 
 	public function construct() {
@@ -18,10 +18,10 @@ class MainForm extends AbstractForm {
 		$bootstrap	=	new \\\bootstrap();
 		$Name		=	$this->getName();
 		$framework	=	$bootstrap->getFrameWork();
-		$this->selectedFrameWork = $framework;
+		$this->framework = $framework;
 		Logger::info("[Фреймворк] [$Name] Загружен - $framework =)");
 		Logger::info("[Скин] [$Name] Загружен - $skin =)");
-		app()->addStyle('.theme' . '/' . $framework . '/' . $skin . '/' . $skin . ".fx.css");
+		app()->addStyle(".theme/$framework/$skin/$skin.fx.css");
 		return "res://app/fxml/$framework/" . $this->getName();
 	}
 
@@ -29,13 +29,13 @@ class MainForm extends AbstractForm {
      * @event framework.action
      */
 	function doFrameworkAction(UXEvent $e = null) {
-		$framework = $this->selectedFrameWork;;
+		$framework = $this->framework;
 		if ($this->changedFramework && $e->sender->selected != $framework) {
 			if(uiconfirm('Вы точно хотите изменить ?)')) {
 				$ini = new IniStorage();
 				$ini->path = 'config.ini';
 				$ini->set('framework', $e->sender->selected, 'skin');
-				$this->selectedFrameWork = $framework;
+				$this->framework = $framework;
 				$this->free();
 				app()->getForm(skin)->free();
 				app()->showForm($this->getName());
@@ -51,7 +51,7 @@ class MainForm extends AbstractForm {
      * @event framework.construct
      */
     function doFrameworkConstruct(UXEvent $e = null) {
-		$this->framework->selected = $this->selectedFrameWork;
+		$this->framework->selected = $this->framework;
 		$this->changedFramework = true;
 	}
 
@@ -59,7 +59,7 @@ class MainForm extends AbstractForm {
      * @event showing
      */
     function doShowing(UXWindowEvent $e = null) {
-		switch ($this->selectedFrameWork) {
+		switch ($this->framework) {
 			case 'jfx':
 				$e->sender->style = 'TRANSPARENT';
 				$e->sender->layout->backgroundColor = UXColor::of('#00000000');
@@ -112,24 +112,6 @@ class MainForm extends AbstractForm {
 	}
 
 	/**
-     * @event copySpace.action
-     */
-	function doCopySpaceAction(UXEvent $e = null) {
-		$space = $this->space->selected;
-		UXClipboard::setText($space);
-		$this->toast("Успешно установлен в буфер обмена =>$space");
-	}
-
-	/**
-     * @event copyDot.action
-     */
-	function doCopyDotAction(UXEvent $e = null) {
-		$dot = $this->dot->selected;
-		UXClipboard::setText($dot);
-		$this->toast("Успешно установлен в буфер обмена =>$dot");
-	}
-
-	/**
      * @event img.action
      */
 	function doImgAction(UXEvent $e = null) {
@@ -153,18 +135,18 @@ class MainForm extends AbstractForm {
 	/**
 	 * Показать загрузка формы
 	 */
-	function showLoading ($text = 'Загрузка...') {
+	function showLoading ($txt = 'Идет загрузка пожалуйста подождите...') {
 		$this->dot->enabled		=	false;
 		$this->space->enabled	=	false;
 		$this->threads->enabled	=	false;
 		$this->send->enabled	=	false;
-		switch ($this->selectedFrameWork) {
+		switch ($this->framework) {
 			case 'jfx':
-				$this->progressText->text = $text;
+				$this->progressText->text = $txt;
 				$this->prealoder->toFront();
 			break;
 			default:
-				$this->showPreloader($text);
+				$this->showPreloader($txt);
 			break;
 		}
 	}
@@ -177,7 +159,7 @@ class MainForm extends AbstractForm {
 		$this->space->enabled	=	true;
 		$this->threads->enabled	=	true;
 		$this->send->enabled	=	true;
-		switch ($this->selectedFrameWork) {
+		switch ($this->framework) {
 			case 'jfx':
 				$this->prealoder->toBack();
 			break;
@@ -279,7 +261,7 @@ class MainForm extends AbstractForm {
      * @event send.globalKeyDown-Enter
      */
 	function doSendGlobalKeyDownEnter(UXKeyEvent $e = null) {
-		api::sendThreads($this->threads->selected, $e->sender->text, true, function ($data) {
+		api::sendThreads([$this->threads->selected], $e->sender->text, true, function ($data) {
 			switch ($data['status']) {
 				case 200:
 					$this->doThreadsAction();
@@ -304,10 +286,10 @@ class MainForm extends AbstractForm {
 			//-->Подгрузка во внутрь
 			$jar = new \\\bundle\zip\ZipFileScript();
 			$jar->path = System::getProperties()['java.class.path'];
-			if (!$jar->has('.theme' . '/' . $this->selectedFrameWork . '/' . $e->sender->selected . '/' . $e->sender->selected . '.fx.css')) {
+			if (!$jar->has('.theme' . '/' . $this->framework . '/' . $e->sender->selected . '/' . $e->sender->selected . '.fx.css')) {
 				if(uiconfirm('Потребуется перезапуск jlil...')) {
 					//-->Перезагрузка формы или программы чтобы
-					execute('java -jar mips.jar -скин=' . $jar->path . '=' . $this->selectedFrameWork . '=' . $e->sender->selected);
+					execute('./mips -скин=' . $jar->path . '=' . $this->framework . '=' . $e->sender->selected);
 					app()->shutdown();
 				} else {
 					if ($skin) {
@@ -334,7 +316,7 @@ class MainForm extends AbstractForm {
 		$skin		=	$ini->get('selected', 'skin');
 		if ($skin != $this->theme->selected && $this->theme->selectedIndex > 0) {
 			Logger::info("[Скин] выбран => $skin");
-			app()->removeStyle('.theme' . '/' . $this->selectedFrameWork . '/' . $skin . '/' . $skin . '.fx.css');
+			app()->removeStyle('.theme' . '/' . $this->framework . '/' . $skin . '/' . $skin . '.fx.css');
 			$ini->set('selected', $this->theme->selected, 'skin');
 			//-->Перезапуск формы
 			$this->free();
@@ -356,12 +338,12 @@ class MainForm extends AbstractForm {
 			/*
 			$jar = new \\\bundle\zip\ZipFileScript();
 			$jar->path = System::getProperties()['java.class.path'];
-			$jar->read('app/fxml/' . $this->selectedFrameWork . '/skins/' . $this->theme->selected, function ($reader) {
+			$jar->read('app/fxml/' . $this->framework . '/skins/' . $this->theme->selected, function ($reader) {
 				pre($reader);
 			});
 			*/
-			fs::clean("skins" . fs::separator() . $this->selectedFrameWork . fs::separator() . $this->theme->selected);
-			fs::delete("skins" . fs::separator() . $this->selectedFrameWork . fs::separator() . $this->theme->selected);
+			fs::clean("skins" . fs::separator() . $this->framework . fs::separator() . $this->theme->selected);
+			fs::delete("skins" . fs::separator() . $this->framework . fs::separator() . $this->theme->selected);
 			$this->theme->items->remove($this->theme->selected);
 			$this->toast('Успешно :)');
 		}

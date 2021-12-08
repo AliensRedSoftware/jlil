@@ -6,6 +6,7 @@ $packageLoader = new FrameworkPackageLoader();
 $packageLoader->register();
 $bootstrap = new bootstrap();
 $bootstrap->start();
+
 class bootstrap {
 
 	/**
